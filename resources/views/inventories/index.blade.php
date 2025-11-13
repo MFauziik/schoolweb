@@ -208,7 +208,12 @@
                                 </th>
                                 <th
                                     class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                    <i class="fas fa-info-circle mr-2"></i>Status
+                                    <i class="fas fa-info-circle mr-2"></i>Status Barang
+                                </th>
+                                <!-- TAMBAH KOLOM BARU INI -->
+                                <th
+                                    class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
+                                    <i class="fas fa-hand-holding mr-2"></i>Status Peminjaman
                                 </th>
                                 <th
                                     class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
@@ -247,7 +252,7 @@
                                     </span>
                                 </td>
 
-                                <!-- Status -->
+                                <!-- Status Barang (Kondisi) -->
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     @php
                                     $statusColors = [
@@ -264,14 +269,43 @@
                                     <span
                                         class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium {{ $statusColor }}">
                                         <i class="fas 
-                                            {{ $inventory->status == 'Baik' ? 'fa-check-circle' : '' }}
-                                            {{ $inventory->status == 'Rusak Ringan' ? 'fa-exclamation-triangle' : '' }}
-                                            {{ $inventory->status == 'Rusak Berat' ? 'fa-times-circle' : '' }}
-                                            {{ $inventory->status == 'Perlu Perbaikan' ? 'fa-tools' : '' }}
-                                            {{ $inventory->status == 'Hilang' ? 'fa-question-circle' : '' }}
-                                            mr-1"></i>
+                    {{ $inventory->status == 'Baik' ? 'fa-check-circle' : '' }}
+                    {{ $inventory->status == 'Rusak Ringan' ? 'fa-exclamation-triangle' : '' }}
+                    {{ $inventory->status == 'Rusak Berat' ? 'fa-times-circle' : '' }}
+                    {{ $inventory->status == 'Perlu Perbaikan' ? 'fa-tools' : '' }}
+                    {{ $inventory->status == 'Hilang' ? 'fa-question-circle' : '' }}
+                    mr-1"></i>
                                         {{ $inventory->status }}
                                     </span>
+                                </td>
+
+                                <!-- STATUS PEMINJAMAN BARU -->
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    @if($inventory->isBorrowed())
+                                    @php
+                                    $activeBorrowing = $inventory->activeBorrowing();
+                                    @endphp
+                                    <div class="flex flex-col space-y-1">
+                                        <span
+                                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
+                                            <i class="fas fa-hand-holding mr-1"></i>
+                                            Dipinjam
+                                        </span>
+                                        <div class="text-xs text-gray-600 dark:text-gray-400">
+                                            <div class="font-medium">Oleh: {{ $activeBorrowing->peminjam_nama }}</div>
+                                            <div>Kelas: {{ $activeBorrowing->peminjam_kelas }}</div>
+                                            <div class="truncate max-w-xs" title="{{ $activeBorrowing->keperluan }}">
+                                                Keperluan: {{ Str::limit($activeBorrowing->keperluan, 30) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @else
+                                    <span
+                                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                                        <i class="fas fa-check-circle mr-1"></i>
+                                        Tersedia
+                                    </span>
+                                    @endif
                                 </td>
 
                                 <!-- Lokasi -->
@@ -318,7 +352,8 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="7" class="px-6 py-8 text-center">
+                                <td colspan="8" class="px-6 py-8 text-center">
+                                    <!-- Update colspan dari 7 menjadi 8 -->
                                     <div
                                         class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400">
                                         <i class="fas fa-boxes text-4xl mb-3"></i>

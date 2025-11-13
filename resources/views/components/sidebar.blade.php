@@ -33,6 +33,13 @@
             <i class="fas fa-school text-amber-500 mr-3"></i>
             <span class="text-gray-700 dark:text-gray-200 font-medium">Kelola Inventory</span>
         </a>
+
+        <!-- TAMBAHAN: Link Peminjaman -->
+        <a href="{{ route('borrowings.create') }}"
+            class="flex items-center p-3 rounded-lg hover:bg-white dark:hover:bg-gray-700 hover:shadow transition-all duration-200 {{ request()->routeIs('borrowings.*') ? 'bg-white dark:bg-gray-700 shadow' : '' }}">
+            <i class="fas fa-hand-holding text-purple-500 mr-3"></i>
+            <span class="text-gray-700 dark:text-gray-200 font-medium">Peminjaman Barang</span>
+        </a>
     </nav>
 
     <!-- User Info -->

@@ -23,6 +23,9 @@
                             class="text-gray-300 hover:text-white transition-colors">Data Guru</a></li>
                     <li><a href="{{ route('inventories.index') }}"
                             class="text-gray-300 hover:text-white transition-colors">Inventory</a></li>
+                    <!-- TAMBAHAN: Link Peminjaman di Footer -->
+                    <li><a href="{{ route('borrowings.create') }}"
+                            class="text-gray-300 hover:text-white transition-colors">Peminjaman Barang</a></li>
                 </ul>
             </div>
             <div>

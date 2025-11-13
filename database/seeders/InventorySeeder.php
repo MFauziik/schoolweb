@@ -1,230 +1,93 @@
 <?php
+// database/seeders/InventorySeeder.php
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\Inventory;
-use Carbon\Carbon;
+use Illuminate\Database\Seeder;
 
 class InventorySeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
-        $inventories = [
-            // Elektronik & Teknologi
-            [
-                'kode_barang' => 'ELEC-001',
-                'nama_barang' => 'Proyektor Epson EB-X41',
-                'kategori' => 'Elektronik',
-                'status' => 'Baik',
-                'lokasi_barang' => 'Lab Komputer A',
-                'is_active' => true
-            ],
-            [
-                'kode_barang' => 'ELEC-002',
-                'nama_barang' => 'Laptop ASUS VivoBook',
-                'kategori' => 'Elektronik',
-                'status' => 'Baik',
-                'lokasi_barang' => 'Ruang Guru',
-                'is_active' => true
-            ],
-            [
-                'kode_barang' => 'ELEC-003',
-                'nama_barang' => 'Speaker JBL Flip 5',
-                'kategori' => 'Elektronik',
-                'status' => 'Baik',
-                'lokasi_barang' => 'Aula Sekolah',
-                'is_active' => true
-            ],
-            [
-                'kode_barang' => 'ELEC-004',
-                'nama_barang' => 'Microphone Wireless Shure',
-                'kategori' => 'Elektronik',
-                'status' => 'Baik',
-                'lokasi_barang' => 'Aula Sekolah',
-                'is_active' => true
-            ],
-            [
-                'kode_barang' => 'ELEC-005',
-                'nama_barang' => 'Printer Canon PIXMA',
-                'kategori' => 'Elektronik',
-                'status' => 'Baik',
-                'lokasi_barang' => 'Kantor TU',
-                'is_active' => true
-            ],
-            [
-                'kode_barang' => 'ELEC-006',
-                'nama_barang' => 'Kamera DSLR Canon EOS',
-                'kategori' => 'Elektronik',
-                'status' => 'Rusak Ringan',
-                'lokasi_barang' => 'Lab Multimedia',
-                'is_active' => true
-            ],
-            [
-                'kode_barang' => 'ELEC-007',
-                'nama_barang' => 'AC Split Panasonic',
-                'kategori' => 'Elektronik',
-                'status' => 'Rusak Berat',
-                'lokasi_barang' => 'Ruang Kelas 1A',
-                'is_active' => false
-            ],
-
-            // Peralatan Laboratorium
-            [
-                'kode_barang' => 'LAB-001',
-                'nama_barang' => 'Mikroskop Binokuler',
-                'kategori' => 'Laboratorium',
-                'status' => 'Baik',
-                'lokasi_barang' => 'Lab Biologi',
-                'is_active' => true
-            ],
-            [
-                'kode_barang' => 'LAB-002',
-                'nama_barang' => 'Set Alat Kimia Dasar',
-                'kategori' => 'Laboratorium',
-                'status' => 'Baik',
-                'lokasi_barang' => 'Lab Kimia',
-                'is_active' => true
-            ],
-            [
-                'kode_barang' => 'LAB-003',
-                'nama_barang' => 'Kit Robotik Arduino',
-                'kategori' => 'Laboratorium',
-                'status' => 'Baik',
-                'lokasi_barang' => 'Lab Komputer B',
-                'is_active' => true
-            ],
-            [
-                'kode_barang' => 'LAB-004',
-                'nama_barang' => 'Tabung Reaksi Pyrex',
-                'kategori' => 'Laboratorium',
-                'status' => 'Baik',
-                'lokasi_barang' => 'Lab Kimia',
-                'is_active' => true
-            ],
-            [
-                'kode_barang' => 'LAB-005',
-                'nama_barang' => 'Hotplate Stirrer',
-                'kategori' => 'Laboratorium',
-                'status' => 'Rusak Ringan',
-                'lokasi_barang' => 'Lab Kimia',
-                'is_active' => true
-            ],
-
-            // Peralatan Olahraga
-            [
-                'kode_barang' => 'OLG-001',
-                'nama_barang' => 'Bola Basket Molten',
-                'kategori' => 'Olahraga',
-                'status' => 'Baik',
-                'lokasi_barang' => 'Gudang Olahraga',
-                'is_active' => true
-            ],
-            [
-                'kode_barang' => 'OLG-002',
-                'nama_barang' => 'Bola Voli Mikasa',
-                'kategori' => 'Olahraga',
-                'status' => 'Baik',
-                'lokasi_barang' => 'Gudang Olahraga',
-                'is_active' => true
-            ],
-            [
-                'kode_barang' => 'OLG-003',
-                'nama_barang' => 'Jaring Badminton',
-                'kategori' => 'Olahraga',
-                'status' => 'Baik',
-                'lokasi_barang' => 'Gudang Olahraga',
-                'is_active' => true
-            ],
-            [
-                'kode_barang' => 'OLG-004',
-                'nama_barang' => 'Matras Senam',
-                'kategori' => 'Olahraga',
-                'status' => 'Baik',
-                'lokasi_barang' => 'Gudang Olahraga',
-                'is_active' => true
-            ],
-            [
-                'kode_barang' => 'OLG-005',
-                'nama_barang' => 'Raket Bulutangkis',
-                'kategori' => 'Olahraga',
-                'status' => 'Rusak Ringan',
-                'lokasi_barang' => 'Gudang Olahraga',
-                'is_active' => true
-            ],
-
-            // Perabotan
-            [
-                'kode_barang' => 'FURN-001',
-                'nama_barang' => 'Meja Guru',
-                'kategori' => 'Perabotan',
-                'status' => 'Baik',
-                'lokasi_barang' => 'Ruang Kelas',
-                'is_active' => true
-            ],
-            [
-                'kode_barang' => 'FURN-002',
-                'nama_barang' => 'Kursi Siswa',
-                'kategori' => 'Perabotan',
-                'status' => 'Baik',
-                'lokasi_barang' => 'Ruang Kelas',
-                'is_active' => true
-            ],
-            [
-                'kode_barang' => 'FURN-003',
-                'nama_barang' => 'Papan Tulis Whiteboard',
-                'kategori' => 'Perabotan',
-                'status' => 'Baik',
-                'lokasi_barang' => 'Ruang Kelas',
-                'is_active' => true
-            ],
-            [
-                'kode_barang' => 'FURN-004',
-                'nama_barang' => 'Rak Buku Perpustakaan',
-                'kategori' => 'Perabotan',
-                'status' => 'Baik',
-                'lokasi_barang' => 'Perpustakaan',
-                'is_active' => true
-            ],
-            [
-                'kode_barang' => 'FURN-005',
-                'nama_barang' => 'Lemari Arsip',
-                'kategori' => 'Perabotan',
-                'status' => 'Rusak Ringan',
-                'lokasi_barang' => 'Kantor TU',
-                'is_active' => true
-            ],
-
-            // Buku & Alat Tulis
-            [
-                'kode_barang' => 'BOOK-001',
-                'nama_barang' => 'Buku Paket Matematika',
-                'kategori' => 'Buku',
-                'status' => 'Baik',
-                'lokasi_barang' => 'Perpustakaan',
-                'is_active' => true
-            ],
-            [
-                'kode_barang' => 'BOOK-002',
-                'nama_barang' => 'Buku Paket Bahasa Indonesia',
-                'kategori' => 'Buku',
-                'status' => 'Baik',
-                'lokasi_barang' => 'Perpustakaan',
-                'is_active' => true
-            ],
-            [
-                'kode_barang' => 'STN-001',
-                'nama_barang' => 'Whiteboard Marker',
-                'kategori' => 'Alat Tulis',
-                'status' => 'Baik',
-                'lokasi_barang' => 'Gudang ATK',
-                'is_active' => true
-            ]
+        $kategori = [
+            'Elektronik', 'Laboratorium', 'Olahraga', 'Perabotan', 
+            'Buku', 'Alat Tulis', 'Alat Musik', 'Kesenian', 'Kebersihan'
         ];
 
-        foreach ($inventories as $inventory) {
-            Inventory::create($inventory);
+        $lokasi = [
+            'Lab Komputer', 'Lab Fisika', 'Lab Kimia', 'Lab Biologi',
+            'Perpustakaan', 'Ruang Guru', 'Ruang Kepala Sekolah',
+            'Aula', 'Lapangan', 'Ruang OSIS', 'Ruang UKS'
+        ];
+
+        $status = ['Baik', 'Rusak Ringan', 'Rusak Berat', 'Perlu Perbaikan', 'Hilang'];
+
+        // Data barang elektronik
+        $elektronik = [
+            ['Laptop', 'ELK-001'], ['Proyektor', 'ELK-002'], ['Speaker', 'ELK-003'],
+            ['Microphone', 'ELK-004'], ['Printer', 'ELK-005'], ['Scanner', 'ELK-006'],
+            ['Kamera', 'ELK-007'], ['TV', 'ELK-008'], ['AC', 'ELK-009'], ['Kipas Angin', 'ELK-010']
+        ];
+
+        // Data barang laboratorium
+        $laboratorium = [
+            ['Mikroskop', 'LAB-001'], ['Tabung Reaksi', 'LAB-002'], ['Pipet', 'LAB-003'],
+            ['Bunsen', 'LAB-004'], ['Neraca', 'LAB-005'], ['Gelas Ukur', 'LAB-006'],
+            ['Termometer', 'LAB-007'], ['PH Meter', 'LAB-008'], ['Centrifuge', 'LAB-009']
+        ];
+
+        // Data barang olahraga
+        $olahraga = [
+            ['Bola Basket', 'OLR-001'], ['Bola Voli', 'OLR-002'], ['Bola Sepak', 'OLR-003'],
+            ['Jaring Voli', 'OLR-004'], ['Raket Badminton', 'OLR-005'], ['Kok', 'OLR-006'],
+            ['Matras', 'OLR-007'], ['Pluit', 'OLR-008'], ['Stopwatch', 'OLR-009']
+        ];
+
+        // Data perabotan
+        $perabotan = [
+            ['Meja Guru', 'PRB-001'], ['Kursi Guru', 'PRB-002'], ['Meja Siswa', 'PRB-003'],
+            ['Kursi Siswa', 'PRB-004'], ['Lemari', 'PRB-005'], ['Papan Tulis', 'PRB-006'],
+            ['Rak Buku', 'PRB-007'], ['Filing Cabinet', 'PRB-008']
+        ];
+
+        // Gabungkan semua barang
+        $allItems = array_merge($elektronik, $laboratorium, $olahraga, $perabotan);
+
+        foreach ($allItems as $item) {
+            Inventory::create([
+                'kode_barang' => $item[1],
+                'nama_barang' => $item[0],
+                'kategori' => $this->getKategoriFromKode($item[1]),
+                'status' => fake()->randomElement($status),
+                'lokasi_barang' => fake()->randomElement($lokasi),
+                'is_active' => fake()->boolean(85), // 85% aktif
+            ]);
         }
+
+        // Tambahkan beberapa buku
+        for ($i = 1; $i <= 15; $i++) {
+            Inventory::create([
+                'kode_barang' => 'BUK-' . str_pad($i, 3, '0', STR_PAD_LEFT),
+                'nama_barang' => 'Buku ' . fake()->words(2, true),
+                'kategori' => 'Buku',
+                'status' => 'Baik',
+                'lokasi_barang' => 'Perpustakaan',
+                'is_active' => true,
+            ]);
+        }
+    }
+
+    private function getKategoriFromKode($kode): string
+    {
+        $prefix = substr($kode, 0, 3);
+        return match($prefix) {
+            'ELK' => 'Elektronik',
+            'LAB' => 'Laboratorium',
+            'OLR' => 'Olahraga',
+            'PRB' => 'Perabotan',
+            'BUK' => 'Buku',
+            default => 'Lainnya'
+        };
     }
 }

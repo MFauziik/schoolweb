@@ -5,6 +5,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BorrowingController;
 use App\Http\Controllers\HomeController;
 
 /*
@@ -25,6 +26,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('students', StudentController::class);
     Route::resource('teachers', TeacherController::class);
     Route::resource('inventories', InventoryController::class);
+    // routes/web.php
+Route::resource('borrowings', BorrowingController::class);
+Route::post('/borrowings/{borrowing}/return', [BorrowingController::class, 'return'])->name('borrowings.return');
 });
 
 // API Routes for real-time updates
