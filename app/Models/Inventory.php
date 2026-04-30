@@ -3,12 +3,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Inventory extends Model
 {
-    protected $fillable = ['kode_barang', 'nama_barang', 'kategori', 'status', 'lokasi_barang', 'is_active'];
+    use HasFactory;
+    protected $fillable = ['kode_barang', 'nama_barang', 'kategori', 'status', 'jumlah', 'kondisi', 'lokasi_barang', 'is_active'];
 
     // Relationship dengan borrowing
     public function borrowings(): HasMany

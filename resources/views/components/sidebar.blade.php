@@ -1,69 +1,64 @@
 <!-- components/sidebar.blade.php -->
-<div
-    class="sidebar bg-gradient-to-b from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 w-64 min-h-screen p-4 shadow-lg theme-transition">
-    <div class="sidebar-header mb-8">
-        <div class="flex items-center justify-center">
-            <i class="fas fa-graduation-cap text-2xl text-primary-500 mr-3"></i>
-            <h2 class="text-xl font-bold text-gray-800 dark:text-white">EduManage</h2>
+<div class="sidebar bg-white w-72 min-h-screen p-6 border-r border-slate-100 flex flex-col theme-transition">
+    <div class="sidebar-header mb-10 flex items-center gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary-600 to-indigo-600 flex items-center justify-center shadow-xl shadow-primary-500/30">
+            <i class="fas fa-graduation-cap text-white text-xl"></i>
         </div>
-        <p class="text-sm text-gray-600 dark:text-gray-400 text-center mt-2">Admin Panel</p>
+        <div>
+            <h2 class="text-xl font-black tracking-tighter text-slate-900 leading-none">SmartSchool</h2>
+            <p class="text-[10px] uppercase tracking-[0.3em] font-black text-slate-400 mt-1">Sistem Sekolah</p>
+        </div>
     </div>
 
-    <nav class="space-y-2">
+    <nav class="flex-1 space-y-2">
+        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 ml-2">Menu Utama</p>
+        
         <a href="{{ route('dashboard') }}"
-            class="flex items-center p-3 rounded-lg hover:bg-white dark:hover:bg-gray-700 hover:shadow transition-all duration-200 {{ request()->routeIs('dashboard') ? 'bg-white dark:bg-gray-700 shadow' : '' }}">
-            <i class="fas fa-tachometer-alt text-blue-500 mr-3"></i>
-            <span class="text-gray-700 dark:text-gray-200 font-medium">Dashboard</span>
+            class="flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300 group {{ request()->routeIs('dashboard') ? 'bg-primary-50 text-primary-600' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900' }}">
+            <i class="fas fa-grid-2 text-lg group-hover:scale-110 transition-transform {{ request()->routeIs('dashboard') ? 'text-primary-600' : 'text-slate-400' }}"></i>
+            <span class="font-bold">Panel Utama</span>
         </a>
 
         <a href="{{ route('students.index') }}"
-            class="flex items-center p-3 rounded-lg hover:bg-white dark:hover:bg-gray-700 hover:shadow transition-all duration-200 {{ request()->routeIs('students.*') ? 'bg-white dark:bg-gray-700 shadow' : '' }}">
-            <i class="fas fa-user-graduate text-indigo-500 mr-3"></i>
-            <span class="text-gray-700 dark:text-gray-200 font-medium">Kelola Siswa</span>
+            class="flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300 group {{ request()->routeIs('students.*') ? 'bg-primary-50 text-primary-600' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900' }}">
+            <i class="fas fa-user-graduate text-lg group-hover:scale-110 transition-transform {{ request()->routeIs('students.*') ? 'text-primary-600' : 'text-slate-400' }}"></i>
+            <span class="font-bold">Data Siswa</span>
         </a>
 
         <a href="{{ route('teachers.index') }}"
-            class="flex items-center p-3 rounded-lg hover:bg-white dark:hover:bg-gray-700 hover:shadow transition-all duration-200 {{ request()->routeIs('teachers.*') ? 'bg-white dark:bg-gray-700 shadow' : '' }}">
-            <i class="fas fa-chalkboard-teacher text-green-500 mr-3"></i>
-            <span class="text-gray-700 dark:text-gray-200 font-medium">Kelola Guru</span>
+            class="flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300 group {{ request()->routeIs('teachers.*') ? 'bg-primary-50 text-primary-600' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900' }}">
+            <i class="fas fa-chalkboard-teacher text-lg group-hover:scale-110 transition-transform {{ request()->routeIs('teachers.*') ? 'text-primary-600' : 'text-slate-400' }}"></i>
+            <span class="font-bold">Data Guru</span>
         </a>
 
         <a href="{{ route('inventories.index') }}"
-            class="flex items-center p-3 rounded-lg hover:bg-white dark:hover:bg-gray-700 hover:shadow transition-all duration-200 {{ request()->routeIs('inventories.*') ? 'bg-white dark:bg-gray-700 shadow' : '' }}">
-            <i class="fas fa-school text-amber-500 mr-3"></i>
-            <span class="text-gray-700 dark:text-gray-200 font-medium">Kelola Inventory</span>
+            class="flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300 group {{ request()->routeIs('inventories.*') ? 'bg-primary-50 text-primary-600' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900' }}">
+            <i class="fas fa-school text-lg group-hover:scale-110 transition-transform {{ request()->routeIs('inventories.*') ? 'text-primary-600' : 'text-slate-400' }}"></i>
+            <span class="font-bold">Inventaris</span>
         </a>
 
-        <!-- TAMBAHAN: Link Peminjaman -->
         <a href="{{ route('borrowings.create') }}"
-            class="flex items-center p-3 rounded-lg hover:bg-white dark:hover:bg-gray-700 hover:shadow transition-all duration-200 {{ request()->routeIs('borrowings.*') ? 'bg-white dark:bg-gray-700 shadow' : '' }}">
-            <i class="fas fa-hand-holding text-purple-500 mr-3"></i>
-            <span class="text-gray-700 dark:text-gray-200 font-medium">Peminjaman Barang</span>
+            class="flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300 group {{ request()->routeIs('borrowings.*') ? 'bg-primary-50 text-primary-600' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900' }}">
+            <i class="fas fa-hand-holding text-lg group-hover:scale-110 transition-transform {{ request()->routeIs('borrowings.*') ? 'text-primary-600' : 'text-slate-400' }}"></i>
+            <span class="font-bold">Peminjaman</span>
         </a>
     </nav>
 
     <!-- User Info -->
-    <div class="absolute bottom-4 left-4 right-4">
-        <div class="bg-white dark:bg-gray-700 rounded-lg p-3 shadow">
-            <div class="flex items-center">
-                <div
-                    class="w-8 h-8 bg-primary-500 rounded-full flex items-center justify-center text-white font-bold mr-3">
-                    {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
-                </div>
-                <div class="flex-1">
-                    <p class="text-sm font-medium text-gray-800 dark:text-white truncate">{{ auth()->user()->name }}</p>
-                    <p class="text-xs text-gray-600 dark:text-gray-400">Administrator</p>
-                </div>
+    <div class="mt-auto pt-6 border-t border-slate-100">
+        <div class="flex items-center gap-3 p-3 rounded-2xl bg-slate-50 shadow-sm border border-slate-100">
+            <div class="w-10 h-10 rounded-xl bg-primary-600 flex items-center justify-center text-white font-black shadow-lg shadow-primary-500/20 flex-shrink-0">
+                {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+            </div>
+            <div class="flex-1 min-w-0">
+                <p class="text-sm font-bold text-slate-900 truncate">{{ auth()->user()->name }}</p>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="text-[10px] font-black uppercase tracking-widest text-primary-600 hover:text-primary-700 transition-colors">
+                        Keluar
+                    </button>
+                </form>
             </div>
         </div>
     </div>
 </div>
-
-<style>
-.sidebar {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow-y: auto;
-}
-</style>

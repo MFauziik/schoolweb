@@ -1,29 +1,44 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
+@section('content')
+<div class="flex">
+    <!-- Sidebar -->
+    @include('components.sidebar')
+
+    <!-- Main Content -->
+    <div class="flex-1 p-6 lg:p-10 bg-slate-50/50 min-h-screen theme-transition">
+        <div class="max-w-4xl mx-auto">
+            <!-- Header -->
+            <div class="mb-12">
+                <h1 class="text-4xl lg:text-5xl font-black tracking-tight text-slate-900 mb-3">
+                    Pengaturan <span class="bg-gradient-to-r from-primary-600 to-indigo-600 bg-clip-text text-transparent">Profil</span>
+                </h1>
+                <p class="text-lg text-slate-500 font-medium tracking-tight">Kelola informasi akun dan preferensi keamanan Anda.</p>
             </div>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
+            <div class="space-y-8">
+                <!-- Profile Information Card -->
+                <div class="glass-card p-8 border-none shadow-xl bg-white/80">
+                    <div class="max-w-xl">
+                        @include('profile.partials.update-profile-information-form')
+                    </div>
                 </div>
-            </div>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
+                <!-- Update Password Card -->
+                <div class="glass-card p-8 border-none shadow-xl bg-white/80">
+                    <div class="max-w-xl">
+                        @include('profile.partials.update-password-form')
+                    </div>
+                </div>
+
+                <!-- Delete Account Card -->
+                <div class="glass-card p-8 border-none shadow-xl bg-red-50/30">
+                    <div class="max-w-xl">
+                        @include('profile.partials.delete-user-form')
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</x-app-layout>
+</div>
+@endsection

@@ -5,160 +5,134 @@
     @include('components.sidebar')
 
     <div
-        class="flex-1 p-8 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 min-h-screen theme-transition">
+    <!-- Main Content -->
+    <div class="flex-1 p-6 lg:p-10 bg-slate-50/50 min-h-screen theme-transition">
         <div class="max-w-4xl mx-auto">
-            <div class="mb-8">
-                <h1
-                    class="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-3">
-                    Edit Data Fasilitas
-                </h1>
-                <p class="text-gray-600 dark:text-gray-300">Update data fasilitas: {{ $inventory->nama_barang }}</p>
+            <!-- Header -->
+            <div class="mb-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <div>
+                    <h1 class="text-4xl lg:text-5xl font-black tracking-tight text-slate-900 mb-3">
+                        Reconfigure <span class="bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent">Asset</span>
+                    </h1>
+                    <p class="text-lg text-slate-500 font-medium tracking-tight">Update telemetry parameters for node: {{ $inventory->nama_barang }}</p>
+                </div>
             </div>
 
-            <div
-                class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-100 dark:border-gray-700">
-                <form action="{{ route('inventories.update', $inventory) }}" method="POST" class="space-y-6">
+            <div class="glass-card border-none shadow-2xl p-10 bg-white/80">
+                <form action="{{ route('inventories.update', $inventory) }}" method="POST" class="space-y-10">
                     @csrf
                     @method('PUT')
 
-                    <!-- Grid untuk Kode Barang dan Nama Barang -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Kode Barang -->
+                    <div class="space-y-8">
+                        <h3 class="text-xs font-black uppercase tracking-[0.3em] text-amber-600 border-b border-amber-100 pb-4">Asset Specification</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <!-- Kode Barang -->
+                            <div class="form-group">
+                                <label for="kode_barang" class="form-label uppercase tracking-widest text-[10px] font-black text-slate-400">
+                                    <i class="fas fa-barcode text-amber-500 mr-2 opacity-50"></i>
+                                    Structural Asset Code
+                                </label>
+                                <input type="text" name="kode_barang" id="kode_barang" class="form-input !rounded-2xl border-slate-100 bg-slate-50/50 font-bold tracking-tight py-4"
+                                    placeholder="Enter unique registry code..." value="{{ old('kode_barang', $inventory->kode_barang) }}">
+                                @error('kode_barang')
+                                <p class="form-error text-[10px] font-black uppercase tracking-widest mt-2">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <!-- Nama Barang -->
+                            <div class="form-group">
+                                <label for="nama_barang" class="form-label uppercase tracking-widest text-[10px] font-black text-slate-400">
+                                    <i class="fas fa-box text-amber-500 mr-2 opacity-50"></i>
+                                    Functional Nomenclature
+                                </label>
+                                <input type="text" name="nama_barang" id="nama_barang" class="form-input !rounded-2xl border-slate-100 bg-slate-50/50 font-bold tracking-tight py-4"
+                                    placeholder="Enter asset name..." value="{{ old('nama_barang', $inventory->nama_barang) }}">
+                                @error('nama_barang')
+                                <p class="form-error text-[10px] font-black uppercase tracking-widest mt-2">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <!-- Kategori -->
+                            <div class="form-group">
+                                <label for="kategori" class="form-label uppercase tracking-widest text-[10px] font-black text-slate-400">
+                                    <i class="fas fa-tags text-amber-500 mr-2 opacity-50"></i>
+                                    Domain Classification
+                                </label>
+                                <select name="kategori" id="kategori" class="form-select !rounded-2xl border-slate-100 bg-slate-50/50 font-black uppercase tracking-[0.1em] text-[10px] py-4 text-slate-600">
+                                    <option value="">Select Domain</option>
+                                    <option value="Elektronik" {{ old('kategori', $inventory->kategori) == 'Elektronik' ? 'selected' : '' }}>Electronic Hardware</option>
+                                    <option value="Laboratorium" {{ old('kategori', $inventory->kategori) == 'Laboratorium' ? 'selected' : '' }}>Lab Apparatus</option>
+                                    <option value="Olahraga" {{ old('kategori', $inventory->kategori) == 'Olahraga' ? 'selected' : '' }}>Kinesthetic Gear</option>
+                                    <option value="Perabotan" {{ old('kategori', $inventory->kategori) == 'Perabotan' ? 'selected' : '' }}>Structural Furniture</option>
+                                    <option value="Buku" {{ old('kategori', $inventory->kategori) == 'Buku' ? 'selected' : '' }}>Archived Knowledge</option>
+                                    <option value="Alat Tulis" {{ old('kategori', $inventory->kategori) == 'Alat Tulis' ? 'selected' : '' }}>Operational Tools</option>
+                                </select>
+                                @error('kategori')
+                                <p class="form-error text-[10px] font-black uppercase tracking-widest mt-2">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <!-- Status -->
+                            <div class="form-group">
+                                <label for="status" class="form-label uppercase tracking-widest text-[10px] font-black text-slate-400">
+                                    <i class="fas fa-info-circle text-amber-500 mr-2 opacity-50"></i>
+                                    Integrity Status
+                                </label>
+                                <select name="status" id="status" class="form-select !rounded-2xl border-slate-100 bg-slate-50/50 font-black uppercase tracking-[0.1em] text-[10px] py-4 text-slate-600">
+                                    <option value="">Select Status</option>
+                                    <option value="Baik" {{ old('status', $inventory->status) == 'Baik' ? 'selected' : '' }}>Nominal (Excellent)</option>
+                                    <option value="Rusak Ringan" {{ old('status', $inventory->status) == 'Rusak Ringan' ? 'selected' : '' }}>Minor Degradation</option>
+                                    <option value="Rusak Berat" {{ old('status', $inventory->status) == 'Rusak Berat' ? 'selected' : '' }}>Critical Failure</option>
+                                    <option value="Perlu Perbaikan" {{ old('status', $inventory->status) == 'Perlu Perbaikan' ? 'selected' : '' }}>Maintenance Required</option>
+                                    <option value="Hilang" {{ old('status', $inventory->status) == 'Hilang' ? 'selected' : '' }}>Entity Missing</option>
+                                </select>
+                                @error('status')
+                                <p class="form-error text-[10px] font-black uppercase tracking-widest mt-2">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <!-- Lokasi Barang -->
                         <div class="form-group">
-                            <label for="kode_barang" class="form-label">
-                                <i class="fas fa-barcode text-green-500 mr-2"></i>
-                                Kode Barang
+                            <label for="lokasi_barang" class="form-label uppercase tracking-widest text-[10px] font-black text-slate-400">
+                                <i class="fas fa-map-marker-alt text-amber-500 mr-2 opacity-50"></i>
+                                Strategic Localization
                             </label>
-                            <input type="text" name="kode_barang" id="kode_barang" class="form-input"
-                                placeholder="Masukkan kode barang"
-                                value="{{ old('kode_barang', $inventory->kode_barang) }}">
-                            @error('kode_barang')
-                            <p class="form-error">{{ $message }}</p>
+                            <input type="text" name="lokasi_barang" id="lokasi_barang" class="form-input !rounded-2xl border-slate-100 bg-slate-50/50 font-bold tracking-tight py-4"
+                                placeholder="Enter deployment room/sector..." value="{{ old('lokasi_barang', $inventory->lokasi_barang) }}">
+                            @error('lokasi_barang')
+                            <p class="form-error text-[10px] font-black uppercase tracking-widest mt-2">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <!-- Nama Barang -->
+                        <!-- Status Aktif -->
                         <div class="form-group">
-                            <label for="nama_barang" class="form-label">
-                                <i class="fas fa-box text-purple-500 mr-2"></i>
-                                Nama Barang
+                            <label for="is_active" class="form-label uppercase tracking-widest text-[10px] font-black text-slate-400">
+                                <i class="fas fa-check-circle text-amber-500 mr-2 opacity-50"></i>
+                                Operational Authorization
                             </label>
-                            <input type="text" name="nama_barang" id="nama_barang" class="form-input"
-                                placeholder="Masukkan nama barang"
-                                value="{{ old('nama_barang', $inventory->nama_barang) }}">
-                            @error('nama_barang')
-                            <p class="form-error">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <!-- Grid untuk Kategori dan Status -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Kategori -->
-                        <div class="form-group">
-                            <label for="kategori" class="form-label">
-                                <i class="fas fa-tags text-amber-500 mr-2"></i>
-                                Kategori
-                            </label>
-                            <select name="kategori" id="kategori" class="form-select">
-                                <option value="">Pilih Kategori</option>
-                                <option value="Elektronik"
-                                    {{ old('kategori', $inventory->kategori) == 'Elektronik' ? 'selected' : '' }}>
-                                    Elektronik</option>
-                                <option value="Laboratorium"
-                                    {{ old('kategori', $inventory->kategori) == 'Laboratorium' ? 'selected' : '' }}>
-                                    Laboratorium</option>
-                                <option value="Olahraga"
-                                    {{ old('kategori', $inventory->kategori) == 'Olahraga' ? 'selected' : '' }}>Olahraga
-                                </option>
-                                <option value="Perabotan"
-                                    {{ old('kategori', $inventory->kategori) == 'Perabotan' ? 'selected' : '' }}>
-                                    Perabotan</option>
-                                <option value="Buku"
-                                    {{ old('kategori', $inventory->kategori) == 'Buku' ? 'selected' : '' }}>Buku
-                                </option>
-                                <option value="Alat Tulis"
-                                    {{ old('kategori', $inventory->kategori) == 'Alat Tulis' ? 'selected' : '' }}>Alat
-                                    Tulis</option>
+                            <select name="is_active" id="is_active" class="form-select !rounded-2xl border-slate-100 bg-slate-50/50 font-black uppercase tracking-[0.2em] text-[10px] py-4 text-slate-600">
+                                <option value="1" {{ old('is_active', $inventory->is_active) == 1 ? 'selected' : '' }}>Authorized Active</option>
+                                <option value="0" {{ old('is_active', $inventory->is_active) == 0 ? 'selected' : '' }}>Locked Offline</option>
                             </select>
-                            @error('kategori')
-                            <p class="form-error">{{ $message }}</p>
+                            @error('is_active')
+                            <p class="form-error text-[10px] font-black uppercase tracking-widest mt-2">{{ $message }}</p>
                             @enderror
                         </div>
-
-                        <!-- Status -->
-                        <div class="form-group">
-                            <label for="status" class="form-label">
-                                <i class="fas fa-info-circle text-blue-500 mr-2"></i>
-                                Status Barang
-                            </label>
-                            <select name="status" id="status" class="form-select">
-                                <option value="">Pilih Status</option>
-                                <option value="Baik"
-                                    {{ old('status', $inventory->status) == 'Baik' ? 'selected' : '' }}>Baik</option>
-                                <option value="Rusak Ringan"
-                                    {{ old('status', $inventory->status) == 'Rusak Ringan' ? 'selected' : '' }}>Rusak
-                                    Ringan</option>
-                                <option value="Rusak Berat"
-                                    {{ old('status', $inventory->status) == 'Rusak Berat' ? 'selected' : '' }}>Rusak
-                                    Berat</option>
-                                <option value="Perlu Perbaikan"
-                                    {{ old('status', $inventory->status) == 'Perlu Perbaikan' ? 'selected' : '' }}>Perlu
-                                    Perbaikan</option>
-                                <option value="Hilang"
-                                    {{ old('status', $inventory->status) == 'Hilang' ? 'selected' : '' }}>Hilang
-                                </option>
-                            </select>
-                            @error('status')
-                            <p class="form-error">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <!-- Lokasi Barang -->
-                    <div class="form-group">
-                        <label for="lokasi_barang" class="form-label">
-                            <i class="fas fa-map-marker-alt text-red-500 mr-2"></i>
-                            Lokasi Barang
-                        </label>
-                        <input type="text" name="lokasi_barang" id="lokasi_barang" class="form-input"
-                            placeholder="Masukkan lokasi barang"
-                            value="{{ old('lokasi_barang', $inventory->lokasi_barang) }}">
-                        @error('lokasi_barang')
-                        <p class="form-error">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <!-- Status Aktif -->
-                    <div class="form-group">
-                        <label for="is_active" class="form-label">
-                            <i class="fas fa-check-circle text-purple-500 mr-2"></i>
-                            Status Aktif
-                        </label>
-                        <select name="is_active" id="is_active" class="form-select">
-                            <option value="1" {{ old('is_active', $inventory->is_active) == 1 ? 'selected' : '' }}>Aktif
-                            </option>
-                            <option value="0" {{ old('is_active', $inventory->is_active) == 0 ? 'selected' : '' }}>Tidak
-                                Aktif</option>
-                        </select>
-                        @error('is_active')
-                        <p class="form-error">{{ $message }}</p>
-                        @enderror
                     </div>
 
                     <!-- Action Buttons -->
-                    <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200 dark:border-gray-600">
-                        <button type="submit" class="btn-primary">
-                            <i class="fas fa-save mr-2"></i>
-                            Update Data Fasilitas
+                    <div class="flex flex-col sm:flex-row gap-6 pt-10 border-t border-slate-50">
+                        <button type="submit" class="btn-primary !from-amber-500 !to-orange-600 flex-1 py-5 !rounded-2xl shadow-xl shadow-amber-500/20 hover:scale-[1.02] active:scale-95 transition-all">
+                            <i class="fas fa-save mr-3 text-lg opacity-50"></i>
+                            <span class="font-black uppercase tracking-[0.2em]">Commit Configuration</span>
                         </button>
-                        <a href="{{ route('inventories.show', $inventory) }}" class="btn-secondary text-center">
-                            <i class="fas fa-eye mr-2"></i>
-                            Lihat Detail
-                        </a>
-                        <a href="{{ route('inventories.index') }}" class="btn-secondary text-center">
-                            <i class="fas fa-arrow-left mr-2"></i>
-                            Kembali ke Daftar
+                        <a href="{{ route('inventories.index') }}" class="glass-card !rounded-2xl py-5 px-10 flex items-center justify-center gap-3 hover:bg-white transition-all text-slate-500 border-none shadow-xl shadow-slate-200">
+                            <i class="fas fa-arrow-left text-lg opacity-50"></i>
+                            <span class="font-black uppercase tracking-widest text-[10px]">Back to Registry</span>
                         </a>
                     </div>
                 </form>
@@ -166,89 +140,7 @@
         </div>
     </div>
 </div>
+</div>
 
-<style>
-.form-group {
-    margin-bottom: 1.5rem;
-}
 
-.form-label {
-    display: block;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: #374151;
-    margin-bottom: 0.5rem;
-}
-
-.dark .form-label {
-    color: #d1d5db;
-}
-
-.form-input,
-.form-select {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: 1px solid #d1d5db;
-    border-radius: 0.75rem;
-    background-color: white;
-    color: #1f2937;
-    transition: all 0.2s;
-}
-
-.dark .form-input,
-.dark .form-select {
-    background-color: #374151;
-    border-color: #4b5563;
-    color: white;
-}
-
-.form-input:focus,
-.form-select:focus {
-    outline: none;
-    ring: 2px;
-    ring-color: #3b82f6;
-    border-color: transparent;
-}
-
-.form-error {
-    color: #ef4444;
-    font-size: 0.875rem;
-    margin-top: 0.5rem;
-}
-
-.btn-primary {
-    display: flex;
-    flex: 1;
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
-    color: white;
-    font-weight: 600;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.75rem;
-    transition: all 0.3s;
-    align-items: center;
-    justify-content: center;
-}
-
-.btn-primary:hover {
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    transform: scale(1.05);
-}
-
-.btn-secondary {
-    display: flex;
-    flex: 1;
-    background-color: #6b7280;
-    color: white;
-    font-weight: 600;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.75rem;
-    transition: all 0.3s;
-    align-items: center;
-    justify-content: center;
-}
-
-.btn-secondary:hover {
-    background-color: #4b5563;
-}
-</style>
 @endsection

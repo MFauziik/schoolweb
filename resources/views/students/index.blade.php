@@ -6,380 +6,269 @@
     @include('components.sidebar')
 
     <!-- Main Content -->
-    <div
-        class="flex-1 p-8 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 min-h-screen theme-transition">
+    <div class="flex-1 p-6 lg:p-10 bg-slate-50/50 min-h-screen theme-transition">
         <div class="max-w-7xl mx-auto">
             <!-- Header -->
-            <div class="mb-8">
-                <h1
-                    class="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-3">
-                    Daftar Siswa
-                </h1>
-                <p class="text-gray-600 dark:text-gray-300">Kelola data siswa EduManage</p>
+            <div class="mb-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <div>
+                    <h1 class="text-4xl lg:text-5xl font-black tracking-tight text-slate-900 mb-3">
+                        Direktori <span class="bg-gradient-to-r from-primary-600 to-indigo-600 bg-clip-text text-transparent">Siswa</span>
+                    </h1>
+                    <p class="text-lg text-slate-500 font-medium tracking-tight">Kelola dan pantau semua data pendaftaran siswa.</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="{{ route('students.create') }}" class="btn-primary py-4 px-8 flex items-center gap-3 shadow-xl shadow-primary-500/20 !rounded-2xl transition-all hover:scale-[1.02]">
+                        <i class="fas fa-user-plus text-lg"></i>
+                        <span class="font-black uppercase tracking-widest text-sm">Tambah Siswa</span>
+                    </a>
+                </div>
             </div>
 
             <!-- Stats Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-                <!-- Total Siswa -->
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border border-gray-100 dark:border-gray-700">
-                    <div class="flex items-center justify-between">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div class="glass-card p-8 group border-none shadow-xl">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-primary-50 flex items-center justify-center group-hover:scale-110 transition-all duration-500">
+                            <i class="fas fa-users text-primary-600 text-xl"></i>
+                        </div>
                         <div>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Total Siswa</p>
-                            <p class="text-2xl font-bold text-gray-800 dark:text-white">{{ $students->total() }}</p>
+                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Total Siswa</p>
+                            <p class="text-3xl font-black text-slate-900 tracking-tighter">{{ $students->total() }}</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Siswa Aktif -->
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border border-gray-100 dark:border-gray-700">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Siswa Aktif</p>
-                            <p class="text-2xl font-bold text-green-600 dark:text-green-400">
-                                {{ $students->where('is_active', true)->count() }}
-                            </p>
+                <div class="glass-card p-8 group border-none shadow-xl">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center group-hover:scale-110 transition-all duration-500">
+                            <i class="fas fa-check-circle text-emerald-600 text-xl"></i>
                         </div>
-                        <div
-                            class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-check-circle text-green-500 text-xl"></i>
+                        <div>
+                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Status Aktif</p>
+                            <p class="text-3xl font-black text-emerald-600 tracking-tighter">{{ $students->where('is_active', true)->count() }}</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Siswa Non-Aktif -->
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border border-gray-100 dark:border-gray-700">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Siswa Non-Aktif</p>
-                            <p class="text-2xl font-bold text-red-600 dark:text-red-400">
-                                {{ $students->where('is_active', false)->count() }}
-                            </p>
+                <div class="glass-card p-8 group border-none shadow-xl">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-red-50 flex items-center justify-center group-hover:scale-110 transition-all duration-500">
+                            <i class="fas fa-times-circle text-red-600 text-xl"></i>
                         </div>
-                        <div class="w-12 h-12 bg-red-100 dark:bg-red-900 rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-times-circle text-red-500 text-xl"></i>
+                        <div>
+                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Status Nonaktif</p>
+                            <p class="text-3xl font-black text-red-600 tracking-tighter">{{ $students->where('is_active', false)->count() }}</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Jurusan Terbanyak -->
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border border-gray-100 dark:border-gray-700">
-                    <div class="flex items-center justify-between">
+                <div class="glass-card p-8 group border-none shadow-xl">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center group-hover:scale-110 transition-all duration-500">
+                            <i class="fas fa-chart-pie text-amber-600 text-xl"></i>
+                        </div>
                         <div>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Jurusan Terbanyak</p>
-                            <p class="text-lg font-bold text-gray-800 dark:text-white truncate">
+                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Jurusan Terbanyak</p>
+                            <p class="text-lg font-black text-slate-900 tracking-tighter truncate">
                                 {{ $students->groupBy('jurusan')->sortByDesc(function($group) { return $group->count(); })->keys()->first() ?? '-' }}
                             </p>
-                        </div>
-                        <div
-                            class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-chart-pie text-purple-500 text-xl"></i>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Action Bar -->
-            <div
-                class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 mb-6 border border-gray-100 dark:border-gray-700">
-                <div class="flex flex-col gap-4">
-                    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-4">
-                        <!-- Kiri: tombol tambah + search -->
-                        <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
-                            <a href="{{ route('students.create') }}" class="btn-primary">
-                                <i class="fas fa-user-plus mr-2"></i>
-                                Tambah Siswa Baru
-                            </a>
-                            <div class="flex items-center gap-2 w-full sm:w-auto">
-                                <div class="relative w-full sm:w-72">
-                                    <span class="absolute left-3 top-2.5 text-gray-400"><i
-                                            class="fas fa-search"></i></span>
-                                    <input type="text" name="search" value="{{ request('search') }}"
-                                        placeholder="Cari nama, NISN, kelas..."
-                                        onkeydown="if(event.key==='Enter'){updateFilter('search', this.value)}"
-                                        class="w-full border border-gray-300 dark:border-gray-600 rounded-lg pl-10 pr-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white" />
-                                </div>
-                                <button
-                                    onclick="updateFilter('search', document.querySelector('input[name=search]').value)"
-                                    class="btn-secondary whitespace-nowrap">
-                                    <i class="fas fa-search mr-2"></i>Cari
-                                </button>
+            <div class="glass-card border-none shadow-xl p-8 mb-8 bg-white/80">
+                <div class="flex flex-col gap-6">
+                    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6">
+                        <!-- Left: Search -->
+                        <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+                            <div class="relative w-full sm:w-80">
+                                <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-slate-300"></i>
+                                <input type="text" name="search" value="{{ request('search') }}"
+                                    placeholder="Cari NISN atau nama siswa..."
+                                    onkeydown="if(event.key==='Enter'){updateFilter('search', this.value)}"
+                                    class="w-full bg-slate-50 border border-slate-100 rounded-2xl py-4 pl-14 pr-4 focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all font-bold tracking-tight outline-none placeholder:text-slate-300 text-slate-600">
                             </div>
                         </div>
 
-                        <!-- Kanan: filter -->
-                        <div class="w-full lg:w-auto flex flex-col md:flex-row md:items-end gap-4 md:gap-6">
-                            <!-- Filter Jurusan -->
+                        <!-- Right: Filters -->
+                        <div class="w-full lg:w-auto flex flex-col md:flex-row md:items-end gap-6">
                             <div class="flex flex-col w-full md:w-auto">
-                                <label class="text-xs text-gray-500 dark:text-gray-400 mb-1">Jurusan</label>
+                                <label class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2 ml-1">Jurusan</label>
                                 <select name="jurusan" onchange="updateFilter('jurusan', this.value)"
-                                    class="w-full md:w-56 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
+                                    class="w-full md:w-64 bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-xs font-black uppercase tracking-widest text-slate-500 focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all outline-none">
                                     <option value="">Semua Jurusan</option>
                                     <option value="Pengembangan Perangkat Lunak dan Gim"
-                                        {{ request('jurusan') == 'Pengembangan Perangkat Lunak dan Gim' ? 'selected' : '' }}>
-                                        PPLG</option>
+                                        {{ request('jurusan') == 'Pengembangan Perangkat Lunak dan Gim' ? 'selected' : '' }}>PPLG</option>
                                     <option value="Teknik Otomotif"
-                                        {{ request('jurusan') == 'Teknik Otomotif' ? 'selected' : '' }}>Teknik Otomotif
-                                    </option>
+                                        {{ request('jurusan') == 'Teknik Otomotif' ? 'selected' : '' }}>Otomotif</option>
                                     <option value="Teknik Pengelasan dan Fabrikasi Logam"
-                                        {{ request('jurusan') == 'Teknik Pengelasan dan Fabrikasi Logam' ? 'selected' : '' }}>
-                                        Pengelasan</option>
+                                        {{ request('jurusan') == 'Teknik Pengelasan dan Fabrikasi Logam' ? 'selected' : '' }}>Pengelasan</option>
                                     <option value="Broadcasting dan Film"
-                                        {{ request('jurusan') == 'Broadcasting dan Film' ? 'selected' : '' }}>
-                                        Broadcasting</option>
-                                    <option value="Animasi" {{ request('jurusan') == 'Animasi' ? 'selected' : '' }}>
-                                        Animasi</option>
+                                        {{ request('jurusan') == 'Broadcasting dan Film' ? 'selected' : '' }}>Broadcasting</option>
+                                    <option value="Animasi" {{ request('jurusan') == 'Animasi' ? 'selected' : '' }}>Animasi</option>
                                 </select>
                             </div>
 
-                            <!-- Filter Status -->
                             <div class="flex flex-col w-full md:w-auto">
-                                <label class="text-xs text-gray-500 dark:text-gray-400 mb-1">Status</label>
+                                <label class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2 ml-1">Status</label>
                                 <select name="status" onchange="updateFilter('status', this.value)"
-                                    class="w-full md:w-40 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
+                                    class="w-full md:w-48 bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-xs font-black uppercase tracking-widest text-slate-500 focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all outline-none">
                                     <option value="">Semua Status</option>
                                     <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Aktif</option>
-                                    <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Non-Aktif
-                                    </option>
+                                    <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Nonaktif</option>
                                 </select>
                             </div>
-
-                            <!-- Clear Filters (moved to badges area) -->
                         </div>
                     </div>
 
-                    <!-- Baris kedua: show per page + filter aktif badge -->
-                    <div
-                        class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-4 border-t border-gray-200 dark:border-gray-600">
-                        <div class="flex items-center gap-2">
-                            <span class="text-sm text-gray-600 dark:text-gray-400">Tampilkan:</span>
+                    <!-- Filter Badges -->
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 pt-6 border-t border-slate-50">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[10px] font-black uppercase text-slate-400 tracking-widest">Tampilkan:</span>
                             <select name="per_page" onchange="updatePerPage(this.value)"
-                                class="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
-                                <option value="10" {{ request('per_page', 10) == 10 ? 'selected' : '' }}>10</option>
-                                <option value="25" {{ request('per_page', 10) == 25 ? 'selected' : '' }}>25</option>
-                                <option value="50" {{ request('per_page', 10) == 50 ? 'selected' : '' }}>50</option>
-                                <option value="100" {{ request('per_page', 10) == 100 ? 'selected' : '' }}>100</option>
+                                class="bg-slate-50 border border-slate-100 rounded-xl px-4 py-2 text-xs font-black text-slate-500 focus:ring-4 focus:ring-primary-500/10 outline-none">
+                                <option value="10" {{ request('per_page', 10) == 10 ? 'selected' : '' }}>10 Baris</option>
+                                <option value="25" {{ request('per_page', 10) == 25 ? 'selected' : '' }}>25 Baris</option>
+                                <option value="50" {{ request('per_page', 10) == 50 ? 'selected' : '' }}>50 Baris</option>
                             </select>
-                            <span class="text-sm text-gray-600 dark:text-gray-400">baris</span>
                         </div>
 
                         @if(request('jurusan') || request('status') || request('search'))
-                        <div class="flex flex-wrap items-center gap-2 text-xs">
-                            <span
-                                class="px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">Filter
-                                aktif:</span>
+                        <div class="flex flex-wrap items-center gap-2">
                             @if(request('jurusan'))
-                            <span
-                                class="px-2 py-1 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">Jurusan:
-                                {{ request('jurusan') }}</span>
+                            <span class="px-4 py-1.5 rounded-full bg-primary-50 text-primary-600 text-[10px] font-black uppercase tracking-widest border border-primary-100 shadow-sm shadow-primary-500/5">Jurusan: {{ request('jurusan') }}</span>
                             @endif
                             @if(request('status') !== null && request('status') !== '')
-                            <span
-                                class="px-2 py-1 rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">Status:
-                                {{ request('status') == '1' ? 'Aktif' : 'Non-Aktif' }}</span>
+                            <span class="px-4 py-1.5 rounded-full bg-emerald-50 text-emerald-600 text-[10px] font-black uppercase tracking-widest border border-emerald-100 shadow-sm shadow-emerald-500/5">Status: {{ request('status') == '1' ? 'Aktif' : 'Nonaktif' }}</span>
                             @endif
                             @if(request('search'))
-                            <span
-                                class="px-2 py-1 rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">Cari:
-                                {{ request('search') }}</span>
+                            <span class="px-4 py-1.5 rounded-full bg-amber-50 text-amber-600 text-[10px] font-black uppercase tracking-widest border border-amber-100 shadow-sm shadow-amber-500/5">Cari: {{ request('search') }}</span>
                             @endif
-                            <button onclick="clearFilters()"
-                                class="ml-2 inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-gray-600 hover:bg-gray-700 text-white">
-                                <i class="fas fa-times mr-1"></i>Clear
+                            <button onclick="clearFilters()" class="ml-2 w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center hover:bg-slate-800 transition-all shadow-lg active:scale-95">
+                                <i class="fas fa-times"></i>
                             </button>
                         </div>
                         @endif
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Table -->
-        <div
-            class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-700">
-            <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                    <thead class="bg-gray-50 dark:bg-gray-700">
-                        <tr>
-                            <th
-                                class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                <i class="fas fa-image mr-2"></i>Foto
-                            </th>
-                            <th
-                                class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                <i class="fas fa-id-card mr-2"></i>NISN
-                            </th>
-                            <th
-                                class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                <i class="fas fa-user mr-2"></i>Nama
-                            </th>
-                            <th
-                                class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                <i class="fas fa-graduation-cap mr-2"></i>Kelas & Jurusan
-                            </th>
-                            <th
-                                class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                <i class="fas fa-calendar mr-2"></i>Angkatan
-                            </th>
-                            <th
-                                class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                <i class="fas fa-check-circle mr-2"></i>Status
-                            </th>
-                            <th
-                                class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                <i class="fas fa-cog mr-2"></i>Aksi
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                        @forelse($students as $student)
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                            <!-- Foto -->
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div
-                                    class="w-12 h-12 rounded-xl overflow-hidden border-2 border-gray-200 dark:border-gray-600">
-                                    @if($student->foto)
-                                    <img src="{{ asset('storage/' . $student->foto) }}" alt="Foto"
-                                        class="w-full h-full object-cover">
-                                    @else
-                                    <div
-                                        class="w-full h-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center">
-                                        <i class="fas fa-user text-white text-sm"></i>
-                                    </div>
-                                    @endif
-                                </div>
-                            </td>
-
-                            <!-- NISN -->
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-mono text-gray-800 dark:text-white">{{ $student->nisn }}
-                                </div>
-                            </td>
-
-                            <!-- Nama -->
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-semibold text-gray-800 dark:text-white">
-                                    {{ $student->nama }}</div>
-                                <div class="text-xs text-gray-500 dark:text-gray-400">
-                                    {{ \Carbon\Carbon::parse($student->tanggal_lahir)->age }} tahun
-                                </div>
-                            </td>
-
-                            <!-- Kelas & Jurusan -->
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-semibold text-gray-800 dark:text-white">
-                                    {{ $student->kelas }}</div>
-                                <div class="text-xs text-gray-500 dark:text-gray-400">{{ $student->jurusan }}</div>
-                            </td>
-
-                            <!-- Angkatan -->
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span
-                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
-                                    {{ $student->angkatan }}
-                                </span>
-                            </td>
-
-                            <!-- Status -->
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span
-                                    class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium {{ $student->is_active ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' }}">
-                                    <i
-                                        class="fas {{ $student->is_active ? 'fa-check-circle' : 'fa-times-circle' }} mr-1"></i>
-                                    {{ $student->is_active ? 'Aktif' : 'Non-Aktif' }}
-                                </span>
-                            </td>
-
-                            <!-- Aksi -->
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                <div class="flex items-center space-x-2">
-                                    <a href="{{ route('students.show', $student) }}"
-                                        class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
-                                        title="Lihat Detail">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <a href="{{ route('students.edit', $student) }}"
-                                        class="text-yellow-600 hover:text-yellow-900 dark:text-yellow-400 dark:hover:text-yellow-300 transition-colors"
-                                        title="Edit">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <form action="{{ route('students.destroy', $student) }}" method="POST"
-                                        class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 transition-colors"
-                                            title="Hapus"
-                                            onclick="return confirm('Apakah Anda yakin ingin menghapus siswa {{ $student->nama }}?')">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="7" class="px-6 py-8 text-center">
-                                <div class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400">
-                                    <i class="fas fa-users text-4xl mb-3"></i>
-                                    <p class="text-lg font-semibold">Tidak ada data siswa</p>
-                                    <p class="text-sm">
-                                        @if(request('jurusan') || request('status'))
-                                        Tidak ditemukan siswa dengan filter yang dipilih
+            <!-- Table -->
+            <div class="glass-card border-none shadow-2xl overflow-hidden bg-white/80">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50/50">
+                                <th class="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]"><i class="fas fa-image mr-2 opacity-50"></i>Foto</th>
+                                <th class="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]"><i class="fas fa-id-card mr-2 opacity-50"></i>NISN</th>
+                                <th class="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]"><i class="fas fa-user mr-2 opacity-50"></i>Identitas</th>
+                                <th class="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]"><i class="fas fa-graduation-cap mr-2 opacity-50"></i>Kelas</th>
+                                <th class="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]"><i class="fas fa-calendar mr-2 opacity-50"></i>Angkatan</th>
+                                <th class="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]"><i class="fas fa-check-circle mr-2 opacity-50"></i>Status</th>
+                                <th class="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] text-right"><i class="fas fa-cog mr-2 opacity-50"></i>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-50">
+                            @forelse($students as $student)
+                            <tr class="hover:bg-slate-50/50 transition-colors group">
+                                <td class="px-8 py-6">
+                                    <div class="w-14 h-14 rounded-2xl overflow-hidden border-4 border-white shadow-sm flex-shrink-0 bg-slate-100">
+                                        @if($student->foto)
+                                        <img src="{{ asset('storage/' . $student->foto) }}" alt="Foto"
+                                            class="w-full h-full object-cover">
                                         @else
-                                        Mulai dengan menambahkan siswa baru
+                                        <div class="w-full h-full flex items-center justify-center bg-primary-50">
+                                            <i class="fas fa-user text-primary-600 text-xl"></i>
+                                        </div>
                                         @endif
-                                    </p>
-                                    <a href="{{ route('students.create') }}" class="mt-4 btn-primary">
-                                        <i class="fas fa-user-plus mr-2"></i>
-                                        Tambah Siswa Pertama
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
+                                    </div>
+                                </td>
 
-            <!-- Pagination & Info -->
-            @if($students->hasPages() || $students->total() > 0)
-            <div class="bg-gray-50 dark:bg-gray-700 px-6 py-4 border-t border-gray-200 dark:border-gray-600">
-                <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-                    <div class="text-sm text-gray-600 dark:text-gray-400">
-                        Menampilkan
-                        <span class="font-semibold">{{ $students->firstItem() ?? 0 }}</span>
-                        sampai
-                        <span class="font-semibold">{{ $students->lastItem() ?? 0 }}</span>
-                        dari
-                        <span class="font-semibold">{{ $students->total() }}</span>
-                        entri
-                        @if(request('jurusan') || request('status'))
-                        (Filter:
-                        @if(request('jurusan'))
-                        Jurusan: {{ request('jurusan') }}
-                        @endif
-                        @if(request('jurusan') && request('status'))
-                        ,
-                        @endif
-                        @if(request('status'))
-                        Status: {{ request('status') == '1' ? 'Aktif' : 'Non-Aktif' }}
-                        @endif
-                        )
+                                <td class="px-8 py-6">
+                                    <div class="text-sm font-black font-mono text-slate-500 tracking-tighter">{{ $student->nisn }}</div>
+                                </td>
+
+                                <td class="px-8 py-6">
+                                    <div class="font-bold text-slate-900 group-hover:text-primary-600 transition-colors tracking-tight">{{ $student->nama }}</div>
+                                    <div class="text-[10px] font-black uppercase text-slate-400 tracking-widest mt-0.5">
+                                        Usia {{ \Carbon\Carbon::parse($student->tanggal_lahir)->age }} Tahun
+                                    </div>
+                                </td>
+
+                                <td class="px-8 py-6">
+                                    <div class="font-bold text-slate-700 tracking-tight">{{ $student->kelas }}</div>
+                                    <div class="text-[10px] font-black uppercase text-slate-400 tracking-widest mt-0.5">Jurusan Sekolah</div>
+                                </td>
+
+                                <td class="px-8 py-6">
+                                    <span class="inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-primary-50 text-primary-600 border border-primary-100 shadow-sm shadow-primary-500/5">
+                                        Angkatan {{ $student->angkatan }}
+                                    </span>
+                                </td>
+
+                                <td class="px-8 py-6">
+                                    <span class="inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest {{ $student->is_active ? 'bg-emerald-50 text-emerald-600 border border-emerald-100 shadow-sm shadow-emerald-500/5' : 'bg-red-50 text-red-600 border border-red-100 shadow-sm shadow-red-500/5' }}">
+                                        {{ $student->is_active ? 'Aktif' : 'Nonaktif' }}
+                                    </span>
+                                </td>
+
+                                <td class="px-8 py-6 text-right">
+                                    <div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+                                        <a href="{{ route('students.show', $student) }}" class="w-10 h-10 rounded-xl bg-slate-50 text-slate-400 flex items-center justify-center hover:bg-primary-50 hover:text-primary-600 hover:scale-110 transition-all shadow-sm"><i class="fas fa-eye text-sm"></i></a>
+                                        <a href="{{ route('students.edit', $student) }}" class="w-10 h-10 rounded-xl bg-slate-50 text-slate-400 flex items-center justify-center hover:bg-amber-50 hover:text-amber-600 hover:scale-110 transition-all shadow-sm"><i class="fas fa-edit text-sm"></i></a>
+                                        <form action="{{ route('students.destroy', $student) }}" method="POST" class="inline">
+                                            @csrf @method('DELETE')
+                                            <button type="submit" class="w-10 h-10 rounded-xl bg-slate-50 text-slate-400 flex items-center justify-center hover:bg-red-50 hover:text-red-600 hover:scale-110 transition-all shadow-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus siswa {{ $student->nama }}?')">
+                                                <i class="fas fa-trash text-sm"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="7" class="px-8 py-20 text-center">
+                                    <div class="flex flex-col items-center justify-center">
+                                        <div class="w-20 h-20 rounded-full bg-slate-50 flex items-center justify-center mb-6 shadow-inner">
+                                            <i class="fas fa-users text-slate-200 text-3xl"></i>
+                                        </div>
+                                        <h3 class="text-xl font-bold text-slate-400 tracking-tight">Data tidak ditemukan</h3>
+                                        <p class="text-sm text-slate-400 mt-2">Sesuaikan filter atau tambah data siswa baru.</p>
+                                        <a href="{{ route('students.create') }}" class="btn-primary mt-8">
+                                            <i class="fas fa-user-plus mr-3"></i>
+                                            Tambah Data Siswa
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination & Info -->
+                @if($students->hasPages() || $students->total() > 0)
+                <div class="bg-slate-50/50 px-8 py-6 border-t border-slate-50">
+                    <div class="flex flex-col sm:flex-row justify-between items-center gap-6">
+                        <div class="text-[10px] font-black uppercase text-slate-400 tracking-widest">
+                            Menampilkan <span class="text-slate-900 font-black">{{ $students->firstItem() ?? 0 }}</span> - 
+                            <span class="text-slate-900 font-black">{{ $students->lastItem() ?? 0 }}</span> dari 
+                            <span class="text-slate-900 font-black tracking-normal">{{ $students->total() }}</span> total data
+                        </div>
+
+                        @if($students->hasPages())
+                        {{ $students->appends(request()->query())->links() }}
                         @endif
                     </div>
-
-                    @if($students->hasPages())
-                    {{ $students->appends(request()->query())->links() }}
-                    @endif
                 </div>
+                @endif
             </div>
-            @endif
         </div>
     </div>
+</div>
+</div>
 </div>
 </div>
 
@@ -422,17 +311,5 @@ function clearFilters() {
 }
 </script>
 
-<style>
-.btn-primary {
-    @apply bg-blue-600 hover: bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors duration-200 font-medium;
-}
 
-.btn-secondary {
-    @apply bg-gray-600 hover: bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors duration-200 font-medium;
-}
-
-.cursor-pointer {
-    cursor: pointer;
-}
-</style>
 @endsection

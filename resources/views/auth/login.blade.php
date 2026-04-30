@@ -1,268 +1,100 @@
 <!DOCTYPE html>
-<html lang="id" class="h-full">
-
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login - EduManage</title>
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Masuk | SmartSchool</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <script>
-    tailwind.config = {
-        darkMode: 'class',
-        theme: {
-            extend: {
-                colors: {
-                    primary: {
-                        50: '#f0f9ff',
-                        100: '#e0f2fe',
-                        500: '#0ea5e9',
-                        600: '#0284c7',
-                        700: '#0369a1',
-                        900: '#0c4a6e',
-                    }
-                },
-                fontFamily: {
-                    'inter': ['Inter', 'sans-serif'],
-                }
-            }
-        }
-    }
-    </script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Vite -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
     <style>
-    .theme-transition {
-        transition: all 0.3s ease-in-out;
-    }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        h1, h2, h3, .font-heading { font-family: 'Outfit', sans-serif; }
     </style>
 </head>
-
-<body
-    class="font-inter bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 theme-transition min-h-full">
-    <!-- Theme Toggle -->
-    <div class="absolute top-4 right-4">
-        <button id="themeToggle"
-            class="p-2 rounded-lg bg-white dark:bg-gray-700 shadow-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
-            <i class="fas fa-moon" id="themeIcon"></i>
-        </button>
-    </div>
-
-    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-md w-full space-y-8">
-            <!-- Header -->
-            <div class="text-center">
-                <div class="flex items-center justify-center mb-6">
-                    <div
-                        class="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
-                        <i class="fas fa-graduation-cap text-white text-2xl"></i>
-                    </div>
-                </div>
-                <h2
-                    class="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-3">
-                    Selamat Datang
-                </h2>
-                <p class="text-gray-600 dark:text-gray-300 text-lg">
-                    Masuk ke akun Anda
-                </p>
+<body class="antialiased bg-slate-50 text-slate-800 min-h-screen flex items-center justify-center p-6">
+    <div class="max-w-md w-full">
+        <!-- Brand -->
+        <div class="text-center mb-10">
+            <div class="w-16 h-16 bg-primary-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl shadow-primary-500/20">
+                <i class="fas fa-graduation-cap text-white text-2xl"></i>
             </div>
+            <h1 class="text-3xl font-black tracking-tight text-slate-900 uppercase">SmartSchool</h1>
+            <p class="text-slate-500 font-medium">Selamat datang kembali, silakan masuk.</p>
+        </div>
 
-            <!-- Login Card -->
-            <div
-                class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 border border-gray-100 dark:border-gray-700">
-                <form class="space-y-6" method="POST" action="{{ route('login') }}">
-                    @csrf
-
-                    <!-- Email -->
-                    <div class="form-group">
-                        <label for="email" class="form-label">
-                            <i class="fas fa-envelope text-blue-500 mr-2"></i>
-                            Alamat Email
-                        </label>
-                        <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
-                            class="form-input" placeholder="masukkan email Anda">
-                        @error('email')
-                        <p class="form-error">{{ $message }}</p>
-                        @enderror
+        <!-- Login Card -->
+        <div class="bg-white p-8 md:p-10 rounded-[2rem] shadow-2xl shadow-slate-200/60 border border-slate-100">
+            <h2 class="text-xl font-bold mb-8 text-slate-900 border-b border-slate-50 pb-4">Masuk ke Akun</h2>
+            
+            <form method="POST" action="{{ route('login') }}" class="space-y-6">
+                @csrf
+                
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2 ml-1">Alamat Email</label>
+                    <div class="relative group">
+                        <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-primary-500 transition-colors"></i>
+                        <input type="email" name="email" value="{{ old('email') }}" required autofocus class="w-full bg-slate-50 border border-slate-200 rounded-xl py-4 pl-12 pr-4 focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all font-medium text-slate-900 outline-none placeholder:text-slate-300" placeholder="nama@email.com">
                     </div>
+                    @error('email')
+                        <p class="text-xs text-red-500 mt-2 font-bold">{{ $message }}</p>
+                    @enderror
+                </div>
 
-                    <!-- Password -->
-                    <div class="form-group">
-                        <label for="password" class="form-label">
-                            <i class="fas fa-lock text-green-500 mr-2"></i>
-                            Kata Sandi
-                        </label>
-                        <input id="password" type="password" name="password" required class="form-input"
-                            placeholder="masukkan kata sandi">
-                        @error('password')
-                        <p class="form-error">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <!-- Remember Me -->
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center">
-                            <input id="remember_me" name="remember" type="checkbox"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="remember_me" class="ml-2 text-sm text-gray-600 dark:text-gray-300">
-                                Ingat saya
-                            </label>
-                        </div>
-
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <label class="block text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Kata Sandi</label>
                         @if (Route::has('password.request'))
-                        <a class="text-sm text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
-                            href="{{ route('password.request') }}">
-                            Lupa kata sandi?
-                        </a>
+                            <a href="{{ route('password.request') }}" class="text-[10px] font-bold uppercase tracking-widest text-primary-600 hover:text-primary-700">Lupa Sandi?</a>
                         @endif
                     </div>
-
-                    <!-- Submit Button -->
-                    <button type="submit" class="btn-primary w-full">
-                        <i class="fas fa-sign-in-alt mr-2"></i>
-                        Masuk
-                    </button>
-
-                    <!-- Register Link -->
-                    <div class="text-center">
-                        <p class="text-gray-600 dark:text-gray-400 text-sm">
-                            Belum punya akun?
-                            <a href="{{ route('register') }}"
-                                class="text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 font-medium transition-colors">
-                                Daftar di sini
-                            </a>
-                        </p>
+                    <div class="relative group">
+                        <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-primary-500 transition-colors"></i>
+                        <input type="password" name="password" required class="w-full bg-slate-50 border border-slate-200 rounded-xl py-4 pl-12 pr-4 focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all font-medium text-slate-900 outline-none placeholder:text-slate-300" placeholder="••••••••">
                     </div>
-                </form>
-
-                <!-- Demo Credentials -->
-                <div
-                    class="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800">
-                    <p class="text-sm text-blue-700 dark:text-blue-300 text-center">
-                        <i class="fas fa-info-circle mr-1"></i>
-                        Demo: admin@example.com / password
-                    </p>
+                    @error('password')
+                        <p class="text-xs text-red-500 mt-2 font-bold">{{ $message }}</p>
+                    @enderror
                 </div>
-            </div>
 
-            <!-- Footer -->
-            <div class="text-center">
-                <p class="text-gray-500 dark:text-gray-400 text-sm">
-                    &copy; {{ date('Y') }} EduManage. All rights reserved.
+                <div class="flex items-center gap-3 ml-1">
+                    <input type="checkbox" name="remember" id="remember" class="w-5 h-5 rounded border-slate-300 text-primary-600 focus:ring-primary-500/20">
+                    <label for="remember" class="text-xs font-bold text-slate-500 cursor-pointer">Ingat saya di perangkat ini</label>
+                </div>
+
+                <button type="submit" class="btn-primary w-full py-4 !rounded-xl font-bold uppercase tracking-widest text-sm shadow-lg shadow-primary-500/30 hover:scale-[1.02] active:scale-95 transition-all">
+                    Masuk Sekarang
+                </button>
+            </form>
+
+            <div class="mt-8 pt-6 border-t border-slate-50 text-center">
+                <p class="text-xs font-medium text-slate-500">
+                    Belum punya akun? 
+                    <a href="{{ route('register') }}" class="text-primary-600 font-bold hover:underline">Daftar Akun Baru</a>
                 </p>
             </div>
         </div>
+        
+        <!-- Quick Access Info -->
+        <div class="mt-6 p-4 bg-primary-50 rounded-2xl flex items-center gap-4 border border-primary-100">
+            <div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center shadow-sm">
+                <i class="fas fa-info-circle text-primary-500"></i>
+            </div>
+            <div class="text-[10px] font-bold text-primary-700 leading-tight">
+                Gunakan akun demo untuk mencoba: <br/>
+                <span class="text-primary-900">admin@example.com</span> / <span class="text-primary-900">password</span>
+            </div>
+        </div>
+
+        <p class="text-center mt-8 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+            &copy; 2024 SmartSchool System
+        </p>
     </div>
-
-    <script>
-    // Theme Toggle
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-
-    // Check for saved theme or prefer color scheme
-    const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ?
-        'dark' : 'light');
-
-    if (savedTheme === 'dark') {
-        document.documentElement.classList.add('dark');
-        themeIcon.classList.replace('fa-moon', 'fa-sun');
-    }
-
-    themeToggle.addEventListener('click', () => {
-        if (document.documentElement.classList.contains('dark')) {
-            document.documentElement.classList.remove('dark');
-            themeIcon.classList.replace('fa-sun', 'fa-moon');
-            localStorage.setItem('theme', 'light');
-        } else {
-            document.documentElement.classList.add('dark');
-            themeIcon.classList.replace('fa-moon', 'fa-sun');
-            localStorage.setItem('theme', 'dark');
-        }
-    });
-    </script>
-
-    <style>
-    .form-group {
-        margin-bottom: 1.5rem;
-    }
-
-    .form-label {
-        display: block;
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: #374151;
-        margin-bottom: 0.5rem;
-    }
-
-    .dark .form-label {
-        color: #d1d5db;
-    }
-
-    .form-input {
-        width: 100%;
-        padding: 0.75rem 1rem;
-        border: 1px solid #d1d5db;
-        border-radius: 0.75rem;
-        background-color: white;
-        color: #1f2937;
-        transition: all 0.2s;
-    }
-
-    .dark .form-input {
-        background-color: #374151;
-        border-color: #4b5563;
-        color: white;
-    }
-
-    .form-input:focus {
-        outline: none;
-        ring: 2px;
-        ring-color: #3b82f6;
-        border-color: transparent;
-    }
-
-    .form-error {
-        color: #ef4444;
-        font-size: 0.875rem;
-        margin-top: 0.5rem;
-        display: flex;
-        align-items: center;
-    }
-
-    .form-error::before {
-        content: "⚠ ";
-        margin-right: 0.25rem;
-    }
-
-    .btn-primary {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        background: linear-gradient(135deg, #3b82f6, #2563eb);
-        color: white;
-        font-weight: 600;
-        padding: 0.75rem 1.5rem;
-        border-radius: 0.75rem;
-        transition: all 0.3s;
-        transform: scale(1);
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    }
-
-    .btn-primary:hover {
-        background: linear-gradient(135deg, #2563eb, #1d4ed8);
-        transform: scale(1.02);
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    }
-    </style>
 </body>
-
 </html>

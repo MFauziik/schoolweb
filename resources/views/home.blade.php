@@ -1,257 +1,202 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Hero Section -->
-<section
-    class="bg-gradient-to-br from-primary-50 to-blue-100 dark:from-gray-800 dark:to-gray-900 py-20 theme-transition">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
-            <h1 class="text-5xl md:text-6xl font-bold text-gray-800 dark:text-white mb-6">
-                Kelola Sekolah dengan
-                <span class="bg-gradient-to-r from-primary-500 to-blue-600 bg-clip-text text-transparent">
-                    Mudah & Efisien
-                </span>
-            </h1>
-            <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
-                Sistem manajemen sekolah terintegrasi untuk mengelola data siswa, guru, dan inventaris dalam satu
-                platform yang modern dan user-friendly.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                @auth
-                <a href="{{ route('dashboard') }}"
-                    class="bg-primary-500 hover:bg-primary-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 shadow-lg">
-                    <i class="fas fa-tachometer-alt mr-2"></i>Masuk Dashboard
-                </a>
-                @else
-                <a href="{{ route('register') }}"
-                    class="bg-primary-500 hover:bg-primary-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 shadow-lg">
-                    <i class="fas fa-rocket mr-2"></i>Mulai Sekarang
-                </a>
-                <a href="{{ route('login') }}"
-                    class="border-2 border-primary-500 text-primary-500 dark:text-primary-400 dark:border-primary-400 hover:bg-primary-500 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105">
-                    <i class="fas fa-sign-in-alt mr-2"></i>Login
-                </a>
-                @endauth
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Features Section -->
-<section class="py-20 bg-white dark:bg-gray-800 theme-transition">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold text-gray-800 dark:text-white mb-4">
-                Fitur Unggulan Kami
-            </h2>
-            <p class="text-xl text-gray-600 dark:text-gray-300">
-                Semua yang Anda butuhkan untuk manajemen sekolah yang efektif
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Feature 1 -->
-            <div
-                class="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-700 dark:to-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                <div class="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center mb-6">
-                    <i class="fas fa-user-graduate text-2xl text-white"></i>
-                </div>
-                <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Manajemen Siswa</h3>
-                <p class="text-gray-600 dark:text-gray-300 mb-4">
-                    Kelola data siswa secara lengkap mulai dari profil, nilai, hingga riwayat akademik dengan antarmuka
-                    yang intuitif.
-                </p>
-                <ul class="text-gray-600 dark:text-gray-300 space-y-2">
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-500 mr-2"></i>
-                        Data profil lengkap
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-500 mr-2"></i>
-                        Riwayat akademik
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-500 mr-2"></i>
-                        Laporan perkembangan
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Feature 2 -->
-            <div
-                class="bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-700 dark:to-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                <div class="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center mb-6">
-                    <i class="fas fa-chalkboard-teacher text-2xl text-white"></i>
-                </div>
-                <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Manajemen Guru</h3>
-                <p class="text-gray-600 dark:text-gray-300 mb-4">
-                    Sistem terpadu untuk mengelola data guru, jadwal mengajar, dan penilaian kinerja dengan mudah dan
-                    terorganisir.
-                </p>
-                <ul class="text-gray-600 dark:text-gray-300 space-y-2">
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-500 mr-2"></i>
-                        Data guru terpusat
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-500 mr-2"></i>
-                        Manajemen jadwal
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-500 mr-2"></i>
-                        Evaluasi kinerja
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Feature 3 -->
-            <div
-                class="bg-gradient-to-br from-amber-50 to-orange-100 dark:from-gray-700 dark:to-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                <div class="w-16 h-16 bg-amber-500 rounded-2xl flex items-center justify-center mb-6">
-                    <i class="fas fa-boxes text-2xl text-white"></i>
-                </div>
-                <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Inventaris Sekolah</h3>
-                <p class="text-gray-600 dark:text-gray-300 mb-4">
-                    Pantau dan kelola semua aset sekolah dengan sistem inventaris yang canggih dan real-time tracking.
-                </p>
-                <ul class="text-gray-600 dark:text-gray-300 space-y-2">
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-500 mr-2"></i>
-                        Tracking aset real-time
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-500 mr-2"></i>
-                        Laporan pemeliharaan
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-500 mr-2"></i>
-                        Sistem peminjaman
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Stats Section -->
-<section class="py-20 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 theme-transition">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold text-gray-800 dark:text-white mb-4">
-                Statistik Sekolah
-            </h2>
-            <p class="text-xl text-gray-600 dark:text-gray-300">
-                Data terkini yang dikelola oleh sistem kami
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Total Siswa Card -->
-            <div
-                class="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-700 dark:to-gray-800 rounded-2xl shadow-lg p-6 border border-blue-100 dark:border-gray-600 transform transition-transform duration-300 hover:scale-105">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="p-3 rounded-full bg-blue-100 dark:bg-blue-900">
-                        <i class="fas fa-user-graduate text-blue-600 dark:text-blue-400 text-xl"></i>
-                    </div>
-                    <span
-                        class="text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900 px-3 py-1 rounded-full">
-                        {{ $activeStudents }} Aktif
+<div class="relative">
+    <!-- Hero Section -->
+    <section class="relative pt-48 pb-32 md:pt-64 md:pb-48 px-6 z-10 overflow-hidden">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="reveal">
+                <div class="inline-flex items-center gap-3 px-6 py-2 rounded-full glass-card border-primary-500/20 text-primary-600 font-black text-xs uppercase tracking-[0.2em] mb-10 mx-auto shadow-lg backdrop-blur-3xl">
+                    <span class="relative flex h-3 w-3">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-3 w-3 bg-primary-500"></span>
                     </span>
+                    Sistem Informasi Manajemen Sekolah Terintegrasi
                 </div>
-                <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-2">Total Siswa Terdaftar</h3>
-                <p class="text-3xl font-bold text-gray-800 dark:text-white mb-4">{{ $studentCount }}</p>
-                <div class="w-full bg-blue-200 dark:bg-blue-700 rounded-full h-2">
-                    <div class="bg-blue-600 dark:bg-blue-400 h-2 rounded-full"
-                        style="width: {{ min(($activeStudents/$studentCount)*100, 100) }}%"></div>
-                </div>
-                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
-                    {{ number_format(($activeStudents/$studentCount)*100, 1) }}% siswa aktif
+                
+                <h1 class="text-6xl md:text-8xl lg:text-[10rem] font-black tracking-tighter leading-[0.85] mb-12 drop-shadow-2xl">
+                    Smart <br/>
+                    <span class="bg-gradient-to-r from-primary-600 via-indigo-600 to-blue-600 bg-clip-text text-transparent italic">Schooling.</span>
+                </h1>
+                
+                <p class="text-xl md:text-2xl text-slate-600 leading-relaxed mb-16 max-w-4xl mx-auto font-medium">
+                    Kelola data siswa, guru, dan inventaris sekolah dengan satu dashboard yang intuitif. Membantu akreditasi dan pelaporan sekolah menjadi lebih efisien.
                 </p>
+                
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                    @auth
+                        <a href="{{ route('dashboard') }}" class="btn-primary !rounded-full py-5 px-12 text-xl w-full sm:w-auto text-center shadow-2xl shadow-primary-500/40 hover:scale-105 transition-all font-black uppercase tracking-widest">
+                            Masuk ke Dashboard
+                        </a>
+                    @else
+                        <a href="{{ route('register') }}" class="btn-primary !rounded-full py-5 px-12 text-xl w-full sm:w-auto text-center shadow-2xl shadow-primary-500/40 hover:scale-105 transition-all font-black uppercase tracking-widest">
+                            Daftar Sekarang
+                        </a>
+                        <a href="#features" class="glass-card !rounded-full py-5 px-12 text-xl w-full sm:w-auto text-center font-black uppercase tracking-widest hover:bg-white transition-all backdrop-blur-3xl">
+                            Lihat Fitur <i class="fas fa-chevron-down ml-2 text-primary-500 text-sm"></i>
+                        </a>
+                    @endauth
+                </div>
             </div>
 
-            <!-- Total Guru Card -->
-            <div
-                class="bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-700 dark:to-gray-800 rounded-2xl shadow-lg p-6 border border-green-100 dark:border-gray-600 transform transition-transform duration-300 hover:scale-105">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="p-3 rounded-full bg-green-100 dark:bg-green-900">
-                        <i class="fas fa-chalkboard-teacher text-green-600 dark:text-green-400 text-xl"></i>
+            <!-- Scrolling Preview -->
+            <div class="mt-48 reveal group">
+                <div class="relative max-w-6xl mx-auto px-4 sm:px-0">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-primary-500/10 to-indigo-500/10 rounded-[40px] blur-[100px] animate-pulse-slow"></div>
+                    <div class="glass-card p-2 md:p-4 rounded-[5rem] relative border-white/60 shadow-2xl backdrop-blur-3xl overflow-hidden group-hover:scale-[1.02] transition-all duration-1000">
+                         <!-- UI Mockup -->
+                         <div class="bg-white rounded-[4rem] p-6 md:p-12 min-h-[400px] md:min-h-[600px] overflow-hidden border border-slate-50">
+                            <div class="flex gap-10 items-start">
+                                <div class="w-80 h-[500px] bg-slate-50 rounded-[3rem] p-8 hidden md:block shadow-inner">
+                                    <div class="space-y-6">
+                                        <div class="h-14 bg-primary-100 rounded-2xl w-full shadow-sm"></div>
+                                        <div class="h-10 bg-slate-100 rounded-xl w-3/4"></div>
+                                        <div class="h-10 bg-slate-100 rounded-xl w-2/3"></div>
+                                        <div class="pt-12 space-y-4">
+                                            <div class="h-4 bg-slate-100 rounded-md w-full"></div>
+                                            <div class="h-4 bg-slate-100 rounded-md w-5/6"></div>
+                                            <div class="h-4 bg-slate-100 rounded-md w-4/5"></div>
+                                            <div class="h-4 bg-slate-100 rounded-md w-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-1 space-y-12">
+                                    <div class="flex justify-between items-center">
+                                        <div class="h-14 bg-slate-50 rounded-3xl w-48 md:w-64 border border-slate-100"></div>
+                                        <div class="h-14 w-14 bg-slate-50 rounded-full border border-slate-100"></div>
+                                    </div>
+                                    <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                                        <div class="h-32 bg-primary-50/50 rounded-[2rem] border border-primary-100 animate-pulse"></div>
+                                        <div class="h-32 bg-indigo-50/50 rounded-[2rem] border border-indigo-100 animate-pulse" style="animation-delay: 0.2s"></div>
+                                        <div class="h-32 bg-blue-50/50 rounded-[2rem] border border-blue-100 animate-pulse hidden md:block" style="animation-delay: 0.4s"></div>
+                                    </div>
+                                    <div class="h-64 bg-slate-50 rounded-[3.5rem] border border-slate-100 shadow-sm relative overflow-hidden">
+                                        <div class="absolute inset-0 bg-gradient-to-br from-slate-50/50 to-white"></div>
+                                    </div>
+                                </div>
+                            </div>
+                         </div>
+                         <!-- Glossy Overlay -->
+                         <div class="absolute inset-0 bg-gradient-to-t from-white/30 via-transparent to-transparent pointer-events-none"></div>
                     </div>
-                    <span
-                        class="text-sm font-medium text-green-600 dark:text-green-400 bg-green-100 dark:bg-green-900 px-3 py-1 rounded-full">
-                        {{ $activeTeachers }} Aktif
-                    </span>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-2">Total Guru Professional</h3>
-                <p class="text-3xl font-bold text-gray-800 dark:text-white mb-4">{{ $teacherCount }}</p>
-                <div class="w-full bg-green-200 dark:bg-green-700 rounded-full h-2">
-                    <div class="bg-green-600 dark:bg-green-400 h-2 rounded-full"
-                        style="width: {{ min(($activeTeachers/$teacherCount)*100, 100) }}%"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Ticker -->
+    <section class="py-20 relative z-10 border-y border-slate-100 bg-white/50 backdrop-blur-3xl overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+                <div class="reveal">
+                    <span class="block text-5xl font-black text-slate-950 tracking-tighter mb-2">{{ number_format(1240) }}+</span>
+                    <span class="text-[10px] uppercase font-black tracking-[0.5em] text-slate-400">Siswa Terdaftar</span>
                 </div>
-                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
-                    {{ number_format(($activeTeachers/$teacherCount)*100, 1) }}% guru aktif
+                <div class="reveal" style="transition-delay: 0.1s">
+                    <span class="block text-5xl font-black text-slate-950 tracking-tighter mb-2">92+</span>
+                    <span class="text-[10px] uppercase font-black tracking-[0.5em] text-slate-400">Guru & Staf</span>
+                </div>
+                <div class="reveal" style="transition-delay: 0.2s">
+                    <span class="block text-5xl font-black text-slate-950 tracking-tighter mb-2">48</span>
+                    <span class="text-[10px] uppercase font-black tracking-[0.5em] text-slate-400">Ruang Kelas</span>
+                </div>
+                <div class="reveal" style="transition-delay: 0.3s">
+                    <span class="block text-5xl font-black text-primary-600 tracking-tighter mb-2">A+</span>
+                    <span class="text-[10px] uppercase font-black tracking-[0.5em] text-slate-400">Akreditasi Sekolah</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section id="features" class="py-48 px-6 relative z-10 overflow-hidden bg-slate-50/30">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-32 reveal">
+                <h2 class="text-[10px] font-black uppercase tracking-[0.5em] text-primary-600 mb-8">Modul Terintegrasi</h2>
+                <h3 class="text-6xl md:text-8xl font-black tracking-tighter mb-10 leading-none">Solusi Cerdas untuk <br class="hidden md:block"/> Pendidikan.</h3>
+                <p class="text-2xl text-slate-500 max-w-4xl mx-auto leading-relaxed font-medium tracking-tight">
+                    SmartSchool menyediakan alat bantu yang dirancang khusus untuk meningkatkan produktivitas operasional sekolah Anda.
                 </p>
             </div>
 
-            <!-- Total Fasilitas Card -->
-            <div
-                class="bg-gradient-to-br from-amber-50 to-orange-100 dark:from-gray-700 dark:to-gray-800 rounded-2xl shadow-lg p-6 border border-amber-100 dark:border-gray-600 transform transition-transform duration-300 hover:scale-105">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="p-3 rounded-full bg-amber-100 dark:bg-amber-900">
-                        <i class="fas fa-school text-amber-600 dark:text-amber-400 text-xl"></i>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+                <!-- Feature 1 -->
+                <div class="reveal glass-card p-14 group hover:translate-y-[-20px] transition-all duration-700 border-none relative overflow-hidden h-full shadow-2xl shadow-slate-200/50 !rounded-[3.5rem]">
+                    <div class="absolute top-0 right-0 w-48 h-48 bg-primary-50 rounded-bl-[120px] group-hover:scale-150 transition-transform duration-1000"></div>
+                    <div class="w-20 h-20 rounded-[2rem] bg-primary-100/50 flex items-center justify-center mb-12 group-hover:rotate-12 transition-all duration-500 shadow-xl shadow-primary-500/10">
+                        <i class="fas fa-id-card text-primary-600 text-4xl"></i>
                     </div>
-                    <span
-                        class="text-sm font-medium text-amber-600 dark:text-amber-400 bg-amber-100 dark:bg-amber-900 px-3 py-1 rounded-full">
-                        {{ $activeInventories }} Tersedia
-                    </span>
+                    <h4 class="text-4xl font-black mb-8 group-hover:text-primary-600 transition-colors tracking-tighter leading-none">Database Siswa</h4>
+                    <p class="text-slate-500 leading-relaxed mb-10 text-xl font-medium tracking-tight">Profil lengkap siswa, rekam medis, riwayat akademik, dan absensi otomatis dalam satu basis data terpadu.</p>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-2">Total Fasilitas</h3>
-                <p class="text-3xl font-bold text-gray-800 dark:text-white mb-4">{{ $inventoryCount }}</p>
-                <div class="w-full bg-amber-200 dark:bg-amber-700 rounded-full h-2">
-                    <div class="bg-amber-600 dark:bg-amber-400 h-2 rounded-full"
-                        style="width: {{ min(($activeInventories/$inventoryCount)*100, 100) }}%"></div>
-                </div>
-                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
-                    {{ number_format(($activeInventories/$inventoryCount)*100, 1) }}% fasilitas tersedia
-                </p>
-            </div>
-        </div>
 
-        <!-- Additional Info -->
-        <div class="text-center mt-12">
-            <div class="inline-flex items-center bg-white dark:bg-gray-700 rounded-2xl shadow-lg px-6 py-4">
-                <i class="fas fa-info-circle text-primary-500 mr-3 text-xl"></i>
-                <p class="text-gray-600 dark:text-gray-300 font-medium">
-                    Semua data diperbarui secara real-time melalui sistem terintegrasi
-                </p>
+                <!-- Feature 2 -->
+                <div class="reveal glass-card p-14 group hover:translate-y-[-20px] transition-all duration-700 border-none relative overflow-hidden h-full shadow-2xl shadow-slate-200/50 !rounded-[3.5rem]" style="transition-delay: 100ms">
+                    <div class="absolute top-0 right-0 w-48 h-48 bg-indigo-50 rounded-bl-[120px] group-hover:scale-150 transition-transform duration-1000"></div>
+                    <div class="w-20 h-20 rounded-[2rem] bg-indigo-100/50 flex items-center justify-center mb-12 group-hover:rotate-12 transition-all duration-500 shadow-xl shadow-indigo-500/10">
+                        <i class="fas fa-user-tie text-indigo-600 text-4xl"></i>
+                    </div>
+                    <h4 class="text-4xl font-black mb-8 group-hover:text-indigo-600 transition-colors tracking-tighter leading-none">Manajemen Guru</h4>
+                    <p class="text-slate-500 leading-relaxed mb-10 text-xl font-medium tracking-tight">Monitoring kinerja pengajar, jadwal mengajar yang fleksibel, dan kolaborasi antar guru melalui portal internal.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="reveal glass-card p-14 group hover:translate-y-[-20px] transition-all duration-700 border-none relative overflow-hidden h-full shadow-2xl shadow-slate-200/50 !rounded-[3.5rem]" style="transition-delay: 200ms">
+                    <div class="absolute top-0 right-0 w-48 h-48 bg-amber-50 rounded-bl-[120px] group-hover:scale-150 transition-transform duration-1000"></div>
+                    <div class="w-20 h-20 rounded-[2rem] bg-amber-100/50 flex items-center justify-center mb-12 group-hover:rotate-12 transition-all duration-500 shadow-xl shadow-amber-500/10">
+                        <i class="fas fa-boxes-stacked text-amber-600 text-4xl"></i>
+                    </div>
+                    <h4 class="text-4xl font-black mb-8 group-hover:text-amber-600 transition-colors tracking-tighter leading-none">Aset & Logistik</h4>
+                    <p class="text-slate-500 leading-relaxed mb-10 text-xl font-medium tracking-tight">Inventarisasi peralatan sekolah, manajemen peminjaman barang, dan sistem pengingat pemeliharaan rutin.</p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
-<!-- CTA Section -->
-<section class="py-20 bg-gray-50 dark:bg-gray-800 theme-transition">
-    <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold text-gray-800 dark:text-white mb-6">
-            Siap Mengubah Cara Anda Mengelola Sekolah?
-        </h2>
-        <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
-            Bergabung dengan ratusan sekolah yang telah mempercayai sistem kami untuk manajemen yang lebih baik.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            @auth
-            <a href="{{ route('dashboard') }}"
-                class="bg-primary-500 hover:bg-primary-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 shadow-lg">
-                <i class="fas fa-play mr-2"></i>Mulai Menggunakan
-            </a>
-            @else
-            <a href="{{ route('register') }}"
-                class="bg-primary-500 hover:bg-primary-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 shadow-lg">
-                <i class="fas fa-user-plus mr-2"></i>Daftar Sekarang
-            </a>
-            <a href="#"
-                class="border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 px-8 py-4 rounded-lg font-semibold text-lg transition-all">
-                <i class="fas fa-play-circle mr-2"></i>Lihat Demo
-            </a>
-            @endauth
+    </section>
+
+    <!-- Dynamic CTA Section -->
+    <section class="py-48 px-6 overflow-hidden relative reveal">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 rounded-[5rem] p-20 md:p-32 text-white relative overflow-hidden group shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)]">
+                <!-- Static Glows -->
+                <div class="absolute top-[-50%] right-[-10%] w-[1000px] h-[1000px] bg-primary-500/10 rounded-full blur-[120px]"></div>
+                <div class="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[100px]"></div>
+                
+                <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
+                    <div>
+                        <h3 class="text-6xl md:text-8xl font-black tracking-tighter mb-12 leading-[0.95]">Tingkatkan Kualitas <br/> Sekolah Anda.</h3>
+                        <p class="text-2xl text-slate-400 font-medium leading-relaxed mb-16 tracking-tight">
+                            Bergabunglah dengan lebih dari 2.500 institusi pendidikan yang telah menggunakan sistem SmartSchool untuk memajukan pendidikan.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-10">
+                            @auth
+                                <a href="{{ route('dashboard') }}" class="bg-white text-slate-950 !rounded-2xl py-6 px-16 text-xl font-black uppercase tracking-[0.2em] hover:scale-105 active:scale-95 transition-all text-center">Ke Dashboard</a>
+                            @else
+                                <a href="{{ route('register') }}" class="bg-white text-slate-950 !rounded-2xl py-6 px-16 text-xl font-black uppercase tracking-[0.2em] hover:scale-105 active:scale-95 transition-all text-center">Gunakan Gratis</a>
+                                <a href="#" class="border-2 border-white/20 !rounded-2xl py-6 px-16 text-xl font-black uppercase tracking-[0.2em] hover:bg-white/10 transition-all text-center backdrop-blur-sm">Hubungi Kami</a>
+                            @endauth
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-8">
+                         <div class="glass-card bg-white/5 p-10 border-white/10 text-center shadow-none !rounded-[3rem]">
+                            <span class="text-5xl font-black block mb-4 tracking-tighter text-primary-400">99.9%</span>
+                            <span class="text-[10px] font-black uppercase tracking-[0.5em] opacity-40">Uptime Sistem</span>
+                         </div>
+                         <div class="glass-card bg-white/5 p-10 border-white/10 text-center shadow-none !rounded-[3rem]">
+                            <span class="text-5xl font-black block mb-4 tracking-tighter text-indigo-400">4.9s</span>
+                            <span class="text-[10px] font-black uppercase tracking-[0.4em] opacity-40">Respons Cepat</span>
+                         </div>
+                         <div class="glass-card bg-white/5 p-10 border-white/10 text-center shadow-none !rounded-[3rem]">
+                            <span class="text-5xl font-black block mb-4 tracking-tighter text-amber-400">24/7</span>
+                            <span class="text-[10px] font-black uppercase tracking-[0.4em] opacity-40">Dukungan Teknis</span>
+                         </div>
+                         <div class="glass-card bg-white/5 p-10 border-white/10 text-center shadow-none !rounded-[3rem]">
+                            <span class="text-5xl font-black block mb-4 tracking-tighter text-emerald-400">10M+</span>
+                            <span class="text-[10px] font-black uppercase tracking-[0.4em] opacity-40">Data Aman</span>
+                         </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 @endsection

@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans antialiased bg-slate-50 text-slate-800;
+  }
+}
+
+@layer components {
+  .theme-transition {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .form-group {
+    @apply mb-6;
+  }
+
+  .form-label {
+    @apply block text-sm font-bold text-slate-700 mb-2 tracking-tight;
+  }
+
+  .form-input,
+  .form-select {
+    @apply w-full px-4 py-3 bg-white border border-slate-200 rounded-2xl focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all duration-200 shadow-sm outline-none;
+  }
+
+  .form-error {
+    @apply mt-2 text-sm text-red-500 font-medium flex items-center;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-8 py-3.5 font-bold text-white bg-gradient-to-br from-primary-600 via-primary-500 to-indigo-600 rounded-2xl shadow-[0_10px_20px_-5px_rgba(71,118,255,0.4)] hover:shadow-[0_20px_30px_-10px_rgba(71,118,255,0.6)] hover:-translate-y-0.5 active:scale-95 transition-all duration-300;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-8 py-3.5 font-bold text-slate-600 bg-white border border-slate-200 rounded-2xl hover:bg-slate-50 hover:border-slate-300 active:scale-95 transition-all duration-200 shadow-sm;
+  }
+
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)] rounded-3xl;
+  }
+
+  .premium-gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 via-indigo-600 to-violet-600 font-extrabold;
+  }
+}

@@ -17,6 +17,8 @@ public function up(): void
         $table->string('nama_barang');
         $table->string('kategori'); // Misal Alat Lab
         $table->string('status'); // Misal Baik, Rusak
+        $table->integer('jumlah')->default(1);
+        $table->string('kondisi')->nullable()->default('Good');
         $table->string('lokasi_barang');
         $table->boolean('is_active')->default(true);
         $table->timestamps();

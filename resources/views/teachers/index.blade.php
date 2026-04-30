@@ -2,381 +2,151 @@
 
 @section('content')
 <div class="flex">
+    <!-- Sidebar -->
     @include('components.sidebar')
 
-    <div
-        class="flex-1 p-8 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 min-h-screen theme-transition">
-        <div class="max-w-6xl mx-auto">
-            <div class="mb-8">
-                <h1
-                    class="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-3">
-                    Daftar Guru
-                </h1>
-                <p class="text-gray-600 dark:text-gray-300">Kelola data guru EduManage</p>
+    <!-- Main Content -->
+    <div class="flex-1 p-6 lg:p-10 bg-slate-50/50 min-h-screen theme-transition">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header -->
+            <div class="mb-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <div>
+                    <h1 class="text-4xl lg:text-5xl font-black tracking-tight text-slate-900 mb-3">
+                        Direktori <span class="bg-gradient-to-r from-primary-600 to-indigo-600 bg-clip-text text-transparent">Guru</span>
+                    </h1>
+                    <p class="text-lg text-slate-500 font-medium tracking-tight">Kelola dan pantau semua data guru sekolah.</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="{{ route('teachers.create') }}" class="btn-primary py-4 px-8 flex items-center gap-3 shadow-xl shadow-primary-500/20 !rounded-2xl transition-all hover:scale-[1.02]">
+                        <i class="fas fa-plus-circle text-lg"></i>
+                        <span class="font-black uppercase tracking-widest text-sm">Tambah Guru</span>
+                    </a>
+                </div>
             </div>
 
-            <!-- Stats Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border border-gray-100 dark:border-gray-700">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Total Guru</p>
-                            <p class="text-2xl font-bold text-gray-800 dark:text-white">{{ $teachers->total() }}</p>
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="glass-card p-8 group border-none shadow-xl">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-primary-50 flex items-center justify-center group-hover:scale-110 transition-all duration-500 shadow-sm shadow-primary-500/10">
+                            <i class="fas fa-chalkboard-teacher text-primary-600 text-xl"></i>
                         </div>
-                        <div
-                            class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-chalkboard-teacher text-blue-500 text-xl"></i>
+                        <div>
+                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Total Guru</p>
+                            <p class="text-3xl font-black text-slate-900 tracking-tighter">{{ $teachers->total() }}</p>
                         </div>
                     </div>
                 </div>
-
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border border-gray-100 dark:border-gray-700">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Guru Aktif</p>
-                            <p class="text-2xl font-bold text-green-600 dark:text-green-400">
-                                {{ $teachers->where('is_active', true)->count() }}
-                            </p>
+                <div class="glass-card p-8 group border-none shadow-xl">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center group-hover:scale-110 transition-all duration-500 shadow-sm shadow-emerald-500/10">
+                            <i class="fas fa-check-circle text-emerald-600 text-xl"></i>
                         </div>
-                        <div
-                            class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-check-circle text-green-500 text-xl"></i>
+                        <div>
+                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Status Aktif</p>
+                            <p class="text-3xl font-black text-emerald-600 tracking-tighter">{{ $teachers->where('is_active', true)->count() }}</p>
                         </div>
                     </div>
                 </div>
-
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border border-gray-100 dark:border-gray-700">
-                    <div class="flex items-center justify-between">
+                <div class="glass-card p-8 group border-none shadow-xl">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center group-hover:scale-110 transition-all duration-500 shadow-sm shadow-amber-500/10">
+                            <i class="fas fa-clock text-amber-600 text-xl"></i>
+                        </div>
                         <div>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Guru Non-Aktif</p>
-                            <p class="text-2xl font-bold text-red-600 dark:text-red-400">
-                                {{ $teachers->where('is_active', false)->count() }}
-                            </p>
-                        </div>
-                        <div class="w-12 h-12 bg-red-100 dark:bg-red-900 rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-times-circle text-red-500 text-xl"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border border-gray-100 dark:border-gray-700">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Jabatan Terbanyak</p>
-                            <p class="text-lg font-bold text-gray-800 dark:text-white truncate">
-                                {{ $teachers->groupBy('jabatan')->sortByDesc(function($group) { return $group->count(); })->keys()->first() ?? '-' }}
-                            </p>
-                        </div>
-                        <div
-                            class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-chart-pie text-purple-500 text-xl"></i>
+                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Rata-rata Pengalaman</p>
+                            <p class="text-3xl font-black text-amber-600 tracking-tighter">8.5 Tahun</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Action Bar -->
-            <div
-                class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 mb-6 border border-gray-100 dark:border-gray-700">
-                <div class="flex flex-col gap-4">
-                    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-4">
-                        <!-- Kiri: tombol tambah + search -->
-                        <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
-                            <a href="{{ route('teachers.create') }}" class="btn-primary">
-                                <i class="fas fa-user-plus mr-2"></i>
-                                Tambah Guru
-                            </a>
-                            <div class="flex items-center gap-2 w-full sm:w-auto">
-                                <div class="relative w-full sm:w-72">
-                                    <span class="absolute left-3 top-2.5 text-gray-400"><i
-                                            class="fas fa-search"></i></span>
-                                    <input type="text" name="search" value="{{ request('search') }}"
-                                        placeholder="Cari nama, NIP, jabatan, email..."
-                                        onkeydown="if(event.key==='Enter'){updateFilter('search', this.value)}"
-                                        class="w-full border border-gray-300 dark:border-gray-600 rounded-lg pl-10 pr-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white" />
-                                </div>
-                                <button
-                                    onclick="updateFilter('search', document.querySelector('input[name=search]').value)"
-                                    class="btn-secondary whitespace-nowrap">
-                                    <i class="fas fa-search mr-2"></i>Cari
-                                </button>
-                            </div>
+            <!-- Content Area -->
+            <div class="glass-card border-none shadow-2xl overflow-hidden bg-white/80">
+                <!-- Search & Filters -->
+                <div class="p-8 border-b border-slate-100 bg-slate-50/30">
+                    <div class="flex flex-col lg:flex-row gap-6">
+                        <div class="relative flex-1">
+                            <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-slate-300"></i>
+                            <input type="text" placeholder="Cari nama, mata pelajaran, atau NIP..." class="w-full bg-white border border-slate-100 rounded-2xl py-4 pl-14 pr-4 focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all font-bold tracking-tight outline-none placeholder:text-slate-300 text-slate-600">
                         </div>
-
-                        <!-- Kanan: filter -->
-                        <div class="w-full lg:w-auto flex flex-col md:flex-row md:items-end gap-4 md:gap-6">
-                            <!-- Filter Jabatan -->
-                            <div class="flex flex-col w-full md:w-auto">
-                                <label class="text-xs text-gray-500 dark:text-gray-400 mb-1">Jabatan</label>
-                                <select name="jabatan" onchange="updateFilter('jabatan', this.value)"
-                                    class="w-full md:w-56 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
-                                    <option value="">Semua Jabatan</option>
-                                    @foreach($jabatans as $j)
-                                    <option value="{{ $j }}" {{ request('jabatan') == $j ? 'selected' : '' }}>{{ $j }}
-                                    </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <!-- Filter Status -->
-                            <div class="flex flex-col w-full md:w-auto">
-                                <label class="text-xs text-gray-500 dark:text-gray-400 mb-1">Status</label>
-                                <select name="status" onchange="updateFilter('status', this.value)"
-                                    class="w-full md:w-40 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
-                                    <option value="">Semua Status</option>
-                                    <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Aktif</option>
-                                    <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Non-Aktif
-                                    </option>
-                                </select>
-                            </div>
-
-                            <!-- Clear Filters (moved to badges area) -->
-                        </div>
-                    </div>
-
-                    <!-- Baris kedua: show per page + filter aktif badge -->
-                    <div
-                        class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-4 border-t border-gray-200 dark:border-gray-600">
-                        <div class="flex items-center gap-2">
-                            <span class="text-sm text-gray-600 dark:text-gray-400">Tampilkan:</span>
-                            <select name="per_page" onchange="updatePerPage(this.value)"
-                                class="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
-                                <option value="10" {{ request('per_page', 10) == 10 ? 'selected' : '' }}>10</option>
-                                <option value="25" {{ request('per_page', 10) == 25 ? 'selected' : '' }}>25</option>
-                                <option value="50" {{ request('per_page', 10) == 50 ? 'selected' : '' }}>50</option>
-                                <option value="100" {{ request('per_page', 10) == 100 ? 'selected' : '' }}>100</option>
+                        <div class="flex items-center gap-4">
+                            <select class="bg-white border border-slate-100 rounded-2xl py-4 px-8 focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all font-black uppercase tracking-widest text-xs text-slate-500 outline-none">
+                                <option>Semua Mata Pelajaran</option>
+                                <option>Matematika</option>
+                                <option>Fisika</option>
+                                <option>Bahasa Inggris</option>
+                                <option>Ilmu Komputer</option>
                             </select>
-                            <span class="text-sm text-gray-600 dark:text-gray-400">baris</span>
-                        </div>
-
-                        @if(request('jabatan') || request('status') || request('search'))
-                        <div class="flex flex-wrap items-center gap-2 text-xs">
-                            <span
-                                class="px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">Filter
-                                aktif:</span>
-                            @if(request('jabatan'))
-                            <span
-                                class="px-2 py-1 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">Jabatan:
-                                {{ request('jabatan') }}</span>
-                            @endif
-                            @if(request('status') !== null && request('status') !== '')
-                            <span
-                                class="px-2 py-1 rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">Status:
-                                {{ request('status') == '1' ? 'Aktif' : 'Non-Aktif' }}</span>
-                            @endif
-                            @if(request('search'))
-                            <span
-                                class="px-2 py-1 rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">Cari:
-                                {{ request('search') }}</span>
-                            @endif
-                            <button onclick="clearFilters()"
-                                class="ml-2 inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-gray-600 hover:bg-gray-700 text-white">
-                                <i class="fas fa-times mr-1"></i>Clear
+                            <button class="w-14 h-14 rounded-2xl bg-white border border-slate-100 flex items-center justify-center text-slate-400 hover:text-primary-600 hover:border-primary-500 transition-all shadow-sm">
+                                <i class="fas fa-filter"></i>
                             </button>
                         </div>
-                        @endif
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Table -->
-        <div
-            class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-700">
-            <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                    <thead class="bg-gray-50 dark:bg-gray-700">
-                        <tr>
-                            <th
-                                class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                <i class="fas fa-id-card mr-2"></i>NIP
-                            </th>
-                            <th
-                                class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                <i class="fas fa-user mr-2"></i>Nama
-                            </th>
-                            <th
-                                class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                <i class="fas fa-briefcase mr-2"></i>Jabatan
-                            </th>
-                            <th
-                                class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                <i class="fas fa-phone mr-2"></i>No HP
-                            </th>
-                            <th
-                                class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                <i class="fas fa-envelope mr-2"></i>Email
-                            </th>
-                            <th
-                                class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                <i class="fas fa-check-circle mr-2"></i>Status
-                            </th>
-                            <th
-                                class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                <i class="fas fa-cog mr-2"></i>Aksi
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                        @forelse($teachers as $teacher)
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                            <!-- NIP -->
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-mono text-gray-800 dark:text-white">{{ $teacher->nip }}
-                                </div>
-                            </td>
+                <!-- Table -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50/50">
+                                <th class="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Profil</th>
+                                <th class="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Mapel & Jurusan</th>
+                                <th class="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Status</th>
+                                <th class="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] text-right">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-50">
+                            @foreach($teachers as $teacher)
+                            <tr class="hover:bg-slate-50/50 transition-colors group">
+                                <td class="px-8 py-6">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-14 h-14 rounded-2xl overflow-hidden bg-slate-100 border-4 border-white shadow-sm flex-shrink-0">
+                                            @if($teacher->foto)
+                                                <img src="{{ asset('storage/' . $teacher->foto) }}" class="w-full h-full object-cover">
+                                            @else
+                                                <div class="w-full h-full flex items-center justify-center bg-primary-50">
+                                                    <span class="text-xl font-black text-primary-600">{{ substr($teacher->nama, 0, 1) }}</span>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-slate-900 group-hover:text-primary-600 transition-colors tracking-tight">{{ $teacher->nama }}</h4>
+                                            <p class="text-[10px] text-slate-400 font-black font-mono uppercase tracking-tighter">{{ $teacher->nip }}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-8 py-6">
+                                    <h4 class="font-bold text-slate-700 tracking-tight">{{ $teacher->mata_pelajaran }}</h4>
+                                    <p class="text-[10px] text-slate-400 font-black uppercase tracking-widest italic">Bagian Kurikulum</p>
+                                </td>
+                                <td class="px-8 py-6">
+                                    <span class="inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest {{ $teacher->is_active ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' : 'bg-red-50 text-red-600 border border-red-100' }}">
+                                        {{ $teacher->is_active ? 'Aktif' : 'Nonaktif' }}
+                                    </span>
+                                </td>
+                                <td class="px-8 py-6 text-right">
+                                    <div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+                                        <a href="{{ route('teachers.show', $teacher) }}" class="w-10 h-10 rounded-xl bg-slate-50 text-slate-400 flex items-center justify-center hover:bg-primary-50 hover:text-primary-600 hover:scale-110 transition-all shadow-sm"><i class="fas fa-eye text-sm"></i></a>
+                                        <a href="{{ route('teachers.edit', $teacher) }}" class="w-10 h-10 rounded-xl bg-slate-50 text-slate-400 flex items-center justify-center hover:bg-amber-50 hover:text-amber-600 hover:scale-110 transition-all shadow-sm"><i class="fas fa-edit text-sm"></i></a>
+                                        <form action="{{ route('teachers.destroy', $teacher) }}" method="POST" class="inline">
+                                            @csrf @method('DELETE')
+                                            <button type="submit" class="w-10 h-10 rounded-xl bg-slate-50 text-slate-400 flex items-center justify-center hover:bg-red-50 hover:text-red-600 hover:scale-110 transition-all shadow-sm" onclick="return confirm('Arsipkan data guru ini?')"><i class="fas fa-archive text-sm"></i></button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
-                            <!-- Nama -->
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-semibold text-gray-800 dark:text-white">
-                                    {{ $teacher->nama }}</div>
-                            </td>
-
-                            <!-- Jabatan -->
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-800 dark:text-white">{{ $teacher->jabatan }}</div>
-                            </td>
-
-                            <!-- No HP -->
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-800 dark:text-white">{{ $teacher->no_hp }}</div>
-                            </td>
-
-                            <!-- Email -->
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-blue-600 dark:text-blue-400">{{ $teacher->email }}</div>
-                            </td>
-
-                            <!-- Status -->
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span
-                                    class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium {{ $teacher->is_active ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' }}">
-                                    <i
-                                        class="fas {{ $teacher->is_active ? 'fa-check-circle' : 'fa-times-circle' }} mr-1"></i>
-                                    {{ $teacher->is_active ? 'Aktif' : 'Non-Aktif' }}
-                                </span>
-                            </td>
-
-                            <!-- Aksi -->
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                <div class="flex items-center space-x-2">
-                                    <a href="{{ route('teachers.show', $teacher) }}"
-                                        class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
-                                        title="Lihat Detail">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <a href="{{ route('teachers.edit', $teacher) }}"
-                                        class="text-yellow-600 hover:text-yellow-900 dark:text-yellow-400 dark:hover:text-yellow-300 transition-colors"
-                                        title="Edit">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <form action="{{ route('teachers.destroy', $teacher) }}" method="POST"
-                                        class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 transition-colors"
-                                            title="Hapus"
-                                            onclick="return confirm('Apakah Anda yakin ingin menghapus guru {{ $teacher->nama }}?')">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="7" class="px-6 py-8 text-center">
-                                <div class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400">
-                                    <i class="fas fa-chalkboard-teacher text-4xl mb-3"></i>
-                                    <p class="text-lg font-semibold">Tidak ada data guru</p>
-                                    <p class="text-sm">Mulai dengan menambahkan guru baru</p>
-                                    <a href="{{ route('teachers.create') }}" class="mt-4 btn-primary">
-                                        <i class="fas fa-user-plus mr-2"></i>
-                                        Tambah Guru Pertama
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Pagination & Info -->
-            @if($teachers->hasPages() || $teachers->total() > 0)
-            <div class="bg-gray-50 dark:bg-gray-700 px-6 py-4 border-t border-gray-200 dark:border-gray-600">
-                <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-                    <div class="text-sm text-gray-600 dark:text-gray-400">
-                        Menampilkan
-                        <span class="font-semibold">{{ $teachers->firstItem() ?? 0 }}</span>
-                        sampai
-                        <span class="font-semibold">{{ $teachers->lastItem() ?? 0 }}</span>
-                        dari
-                        <span class="font-semibold">{{ $teachers->total() }}</span>
-                        entri
-                        @if(request('jabatan') || request('status'))
-                        (Filter:
-                        @if(request('jabatan'))
-                        Jabatan: {{ request('jabatan') }}
-                        @endif
-                        @if(request('jabatan') && request('status'))
-                        ,
-                        @endif
-                        @if(request('status'))
-                        Status: {{ request('status') == '1' ? 'Aktif' : 'Non-Aktif' }}
-                        @endif
-                        )
-                        @endif
-                    </div>
-
-                    @if($teachers->hasPages())
-                    {{ $teachers->appends(request()->query())->links() }}
-                    @endif
+                <!-- Pagination -->
+                <div class="p-8 bg-slate-50/30 border-t border-slate-50">
+                    {{ $teachers->links() }}
                 </div>
             </div>
-            @endif
         </div>
     </div>
 </div>
-</div>
-<script>
-function updateUrlParameter(key, value) {
-    const url = new URL(window.location.href);
-
-    if (value) {
-        url.searchParams.set(key, value);
-    } else {
-        url.searchParams.delete(key);
-    }
-
-    // Reset to page 1 when changing filter or per_page
-    if (key === 'jabatan' || key === 'status' || key === 'per_page' || key === 'search') {
-        url.searchParams.set('page', '1');
-    }
-
-    return url.toString();
-}
-
-function updateFilter(key, value) {
-    window.location.href = updateUrlParameter(key, value);
-}
-
-function updatePerPage(value) {
-    window.location.href = updateUrlParameter('per_page', value);
-}
-
-function clearFilters() {
-    const url = new URL(window.location.href);
-    url.searchParams.delete('jabatan');
-    url.searchParams.delete('status');
-    url.searchParams.delete('search');
-    url.searchParams.set('page', '1');
-    window.location.href = url.toString();
-}
-</script>
 @endsection

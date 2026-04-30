@@ -2,444 +2,168 @@
 
 @section('content')
 <div class="flex">
+    <!-- Sidebar -->
     @include('components.sidebar')
 
-    <div
-        class="flex-1 p-8 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 min-h-screen theme-transition">
+    <!-- Main Content -->
+    <div class="flex-1 p-6 lg:p-10 bg-slate-50/50 min-h-screen theme-transition">
         <div class="max-w-7xl mx-auto">
-            <div class="mb-8">
-                <h1
-                    class="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-3">
-                    Daftar Inventory
-                </h1>
-                <p class="text-gray-600 dark:text-gray-300">Kelola data inventaris sekolah</p>
+            <!-- Header -->
+            <div class="mb-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <div>
+                    <h1 class="text-4xl lg:text-5xl font-black tracking-tight text-slate-900 mb-3">
+                        Inventaris <span class="bg-gradient-to-r from-primary-600 to-indigo-600 bg-clip-text text-transparent">Sekolah</span>
+                    </h1>
+                    <p class="text-lg text-slate-500 font-medium tracking-tight">Lacak, kelola, dan pelihara semua aset milik sekolah.</p>
+                </div>
+                <div class="flex flex-col sm:flex-row items-center gap-4">
+                    <a href="{{ route('borrowings.create') }}" class="px-8 py-4 rounded-2xl bg-white border border-slate-100 flex items-center gap-3 hover:bg-slate-50 transition-all font-black uppercase tracking-widest text-xs text-primary-600 shadow-sm group">
+                        <i class="fas fa-hand-holding group-hover:-translate-y-1 transition-transform"></i>
+                        <span>Peminjaman Aset</span>
+                    </a>
+                    <a href="{{ route('inventories.create') }}" class="btn-primary py-4 px-8 flex items-center gap-3 shadow-xl shadow-primary-500/20 !rounded-2xl transition-all hover:scale-[1.02]">
+                        <i class="fas fa-plus-circle text-lg"></i>
+                        <span class="font-black uppercase tracking-widest text-sm">Tambah Aset</span>
+                    </a>
+                </div>
             </div>
 
-            <!-- Stats Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border border-gray-100 dark:border-gray-700">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Total Barang</p>
-                            <p class="text-2xl font-bold text-gray-800 dark:text-white">{{ $inventories->total() }}</p>
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div class="glass-card p-8 group border-none shadow-xl">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-primary-50 flex items-center justify-center group-hover:scale-110 transition-all duration-500 shadow-sm shadow-primary-500/10">
+                            <i class="fas fa-boxes text-primary-600 text-xl"></i>
                         </div>
-                        <div
-                            class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-boxes text-blue-500 text-xl"></i>
+                        <div>
+                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Total Aset</p>
+                            <p class="text-3xl font-black text-slate-900 tracking-tighter">{{ $inventories->total() }}</p>
                         </div>
                     </div>
                 </div>
-
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border border-gray-100 dark:border-gray-700">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Barang Baik</p>
-                            <p class="text-2xl font-bold text-green-600 dark:text-green-400">
-                                {{ $inventories->where('status', 'Baik')->count() }}
-                            </p>
+                <div class="glass-card p-8 group border-none shadow-xl">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center group-hover:scale-110 transition-all duration-500 shadow-sm shadow-emerald-500/10">
+                            <i class="fas fa-check-double text-emerald-600 text-xl"></i>
                         </div>
-                        <div
-                            class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-check-circle text-green-500 text-xl"></i>
+                        <div>
+                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Tersedia</p>
+                            <p class="text-3xl font-black text-emerald-600 tracking-tighter">84%</p>
                         </div>
                     </div>
                 </div>
-
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border border-gray-100 dark:border-gray-700">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Perlu Perbaikan</p>
-                            <p class="text-2xl font-bold text-yellow-600 dark:text-yellow-400">
-                                {{ $inventories->whereIn('status', ['Rusak Ringan', 'Rusak Berat', 'Perlu Perbaikan'])->count() }}
-                            </p>
+                <div class="glass-card p-8 group border-none shadow-xl">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center group-hover:scale-110 transition-all duration-500 shadow-sm shadow-amber-500/10">
+                            <i class="fas fa-tools text-amber-600 text-xl"></i>
                         </div>
-                        <div
-                            class="w-12 h-12 bg-yellow-100 dark:bg-yellow-900 rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-tools text-yellow-500 text-xl"></i>
+                        <div>
+                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Dalam Perbaikan</p>
+                            <p class="text-3xl font-black text-amber-600 tracking-tighter">12</p>
                         </div>
                     </div>
                 </div>
-
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border border-gray-100 dark:border-gray-700">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Kategori Terbanyak</p>
-                            <p class="text-lg font-bold text-gray-800 dark:text-white truncate">
-                                {{ $inventories->groupBy('kategori')->sortByDesc(function($group) { return $group->count(); })->keys()->first() ?? '-' }}
-                            </p>
+                <div class="glass-card p-8 group border-none shadow-xl">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-rose-50 flex items-center justify-center group-hover:scale-110 transition-all duration-500 shadow-sm shadow-rose-500/10">
+                            <i class="fas fa-exclamation-triangle text-rose-600 text-xl"></i>
                         </div>
-                        <div
-                            class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-chart-pie text-purple-500 text-xl"></i>
+                        <div>
+                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Stok Menipis</p>
+                            <p class="text-3xl font-black text-rose-600 tracking-tighter">3</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Action Bar -->
-            <div
-                class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 mb-6 border border-gray-100 dark:border-gray-700">
-                <div class="flex flex-col gap-4">
-                    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-4">
-                        <!-- Kiri: tombol tambah + search -->
-                        <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
-                            <a href="{{ route('inventories.create') }}" class="btn-primary">
-                                <i class="fas fa-plus mr-2"></i>
-                                Tambah Inventory
-                            </a>
-                            <div class="flex items-center gap-2 w-full sm:w-auto">
-                                <div class="relative w-full sm:w-72">
-                                    <span class="absolute left-3 top-2.5 text-gray-400"><i
-                                            class="fas fa-search"></i></span>
-                                    <input type="text" name="search" value="{{ request('search') }}"
-                                        placeholder="Cari nama, kode, kategori, lokasi..."
-                                        onkeydown="if(event.key==='Enter'){updateFilter('search', this.value)}"
-                                        class="w-full border border-gray-300 dark:border-gray-600 rounded-lg pl-10 pr-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white" />
-                                </div>
-                                <button
-                                    onclick="updateFilter('search', document.querySelector('input[name=search]').value)"
-                                    class="btn-secondary whitespace-nowrap">
-                                    <i class="fas fa-search mr-2"></i>Cari
-                                </button>
-                            </div>
+            <!-- Content Area -->
+            <div class="glass-card border-none shadow-2xl overflow-hidden bg-white/80">
+                <!-- Search & Filters -->
+                <div class="p-8 border-b border-slate-100 bg-slate-50/30">
+                    <div class="flex flex-col lg:flex-row gap-6">
+                        <div class="relative flex-1">
+                            <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-slate-300"></i>
+                            <input type="text" placeholder="Cari nama aset, kode, atau lokasi..." class="w-full bg-white border border-slate-100 rounded-2xl py-4 pl-14 pr-4 focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all font-bold tracking-tight outline-none placeholder:text-slate-300 text-slate-600">
                         </div>
-
-                        <!-- Kanan: filter -->
-                        <div class="w-full lg:w-auto flex flex-col md:flex-row md:items-end gap-4 md:gap-6">
-                            <!-- Filter Kategori -->
-                            <div class="flex flex-col w-full md:w-auto">
-                                <label class="text-xs text-gray-500 dark:text-gray-400 mb-1">Kategori</label>
-                                <select name="kategori" onchange="updateFilter('kategori', this.value)"
-                                    class="w-full md:w-56 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
-                                    <option value="">Semua Kategori</option>
-                                    @isset($kategoris)
-                                    @foreach($kategoris as $k)
-                                    <option value="{{ $k }}" {{ request('kategori') == $k ? 'selected' : '' }}>{{ $k }}
-                                    </option>
-                                    @endforeach
-                                    @endisset
-                                </select>
-                            </div>
-
-                            <!-- Filter Status Barang -->
-                            <div class="flex flex-col w-full md:w-auto">
-                                <label class="text-xs text-gray-500 dark:text-gray-400 mb-1">Status Barang</label>
-                                <select name="status" onchange="updateFilter('status', this.value)"
-                                    class="w-full md:w-48 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
-                                    <option value="">Semua Status</option>
-                                    @isset($statuses)
-                                    @foreach($statuses as $s)
-                                    <option value="{{ $s }}" {{ request('status') == $s ? 'selected' : '' }}>{{ $s }}
-                                    </option>
-                                    @endforeach
-                                    @endisset
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Baris kedua: show per page + filter aktif badge -->
-                    <div
-                        class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-4 border-t border-gray-200 dark:border-gray-600">
-                        <div class="flex items-center gap-2">
-                            <span class="text-sm text-gray-600 dark:text-gray-400">Tampilkan:</span>
-                            <select name="per_page" onchange="updatePerPage(this.value)"
-                                class="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
-                                <option value="10" {{ request('per_page', 10) == 10 ? 'selected' : '' }}>10</option>
-                                <option value="25" {{ request('per_page', 10) == 25 ? 'selected' : '' }}>25</option>
-                                <option value="50" {{ request('per_page', 10) == 50 ? 'selected' : '' }}>50</option>
-                                <option value="100" {{ request('per_page', 10) == 100 ? 'selected' : '' }}>100</option>
+                        <div class="flex items-center gap-4">
+                            <select class="bg-white border border-slate-100 rounded-2xl py-4 px-8 focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all font-black uppercase tracking-widest text-xs text-slate-500 outline-none">
+                                <option>Semua Kategori</option>
+                                <option>Elektronik</option>
+                                <option>Furnitur</option>
+                                <option>Alat Tulis</option>
+                                <option>Peralatan Lab</option>
                             </select>
-                            <span class="text-sm text-gray-600 dark:text-gray-400">baris</span>
-                        </div>
-
-                        @if(request('kategori') || request('status') || request('search'))
-                        <div class="flex flex-wrap items-center gap-2 text-xs">
-                            <span
-                                class="px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">Filter
-                                aktif:</span>
-                            @if(request('kategori'))
-                            <span
-                                class="px-2 py-1 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">Kategori:
-                                {{ request('kategori') }}</span>
-                            @endif
-                            @if(request('status'))
-                            <span
-                                class="px-2 py-1 rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">Status:
-                                {{ request('status') }}</span>
-                            @endif
-                            @if(request('search'))
-                            <span
-                                class="px-2 py-1 rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">Cari:
-                                {{ request('search') }}</span>
-                            @endif
-                            <button onclick="clearFilters()"
-                                class="ml-2 inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-gray-600 hover:bg-gray-700 text-white">
-                                <i class="fas fa-times mr-1"></i>Clear
+                            <button class="w-14 h-14 rounded-2xl bg-white border border-slate-100 flex items-center justify-center text-slate-400 hover:text-primary-600 hover:border-primary-500 transition-all shadow-sm">
+                                <i class="fas fa-sliders text-lg"></i>
                             </button>
                         </div>
-                        @endif
                     </div>
                 </div>
-            </div>
 
-            <!-- Table -->
-            <div
-                class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-700">
+                <!-- Table -->
                 <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                        <thead class="bg-gray-50 dark:bg-gray-700">
-                            <tr>
-                                <th
-                                    class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                    <i class="fas fa-barcode mr-2"></i>Kode
-                                </th>
-                                <th
-                                    class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                    <i class="fas fa-box mr-2"></i>Nama Barang
-                                </th>
-                                <th
-                                    class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                    <i class="fas fa-tags mr-2"></i>Kategori
-                                </th>
-                                <th
-                                    class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                    <i class="fas fa-info-circle mr-2"></i>Status Barang
-                                </th>
-                                <!-- TAMBAH KOLOM BARU INI -->
-                                <th
-                                    class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                    <i class="fas fa-hand-holding mr-2"></i>Status Peminjaman
-                                </th>
-                                <th
-                                    class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                    <i class="fas fa-map-marker-alt mr-2"></i>Lokasi
-                                </th>
-                                <th
-                                    class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                    <i class="fas fa-check-circle mr-2"></i>Aktif
-                                </th>
-                                <th
-                                    class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                    <i class="fas fa-cog mr-2"></i>Aksi
-                                </th>
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50/50">
+                                <th class="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Identitas Aset</th>
+                                <th class="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Kondisi Barang</th>
+                                <th class="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Jumlah Stok</th>
+                                <th class="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] text-right">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                            @forelse($inventories as $inventory)
-                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                                <!-- Kode Barang -->
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-mono text-gray-800 dark:text-white">
-                                        {{ $inventory->kode_barang }}</div>
-                                </td>
-
-                                <!-- Nama Barang -->
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-semibold text-gray-800 dark:text-white">
-                                        {{ $inventory->nama_barang }}</div>
-                                </td>
-
-                                <!-- Kategori -->
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
-                                        {{ $inventory->kategori }}
-                                    </span>
-                                </td>
-
-                                <!-- Status Barang (Kondisi) -->
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    @php
-                                    $statusColors = [
-                                    'Baik' => 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
-                                    'Rusak Ringan' => 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900
-                                    dark:text-yellow-200',
-                                    'Rusak Berat' => 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
-                                    'Perlu Perbaikan' => 'bg-orange-100 text-orange-800 dark:bg-orange-900
-                                    dark:text-orange-200',
-                                    'Hilang' => 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200'
-                                    ];
-                                    $statusColor = $statusColors[$inventory->status] ?? 'bg-gray-100 text-gray-800';
-                                    @endphp
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium {{ $statusColor }}">
-                                        <i class="fas 
-                    {{ $inventory->status == 'Baik' ? 'fa-check-circle' : '' }}
-                    {{ $inventory->status == 'Rusak Ringan' ? 'fa-exclamation-triangle' : '' }}
-                    {{ $inventory->status == 'Rusak Berat' ? 'fa-times-circle' : '' }}
-                    {{ $inventory->status == 'Perlu Perbaikan' ? 'fa-tools' : '' }}
-                    {{ $inventory->status == 'Hilang' ? 'fa-question-circle' : '' }}
-                    mr-1"></i>
-                                        {{ $inventory->status }}
-                                    </span>
-                                </td>
-
-                                <!-- STATUS PEMINJAMAN BARU -->
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    @if($inventory->isBorrowed())
-                                    @php
-                                    $activeBorrowing = $inventory->activeBorrowing();
-                                    @endphp
-                                    <div class="flex flex-col space-y-1">
-                                        <span
-                                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
-                                            <i class="fas fa-hand-holding mr-1"></i>
-                                            Dipinjam
-                                        </span>
-                                        <div class="text-xs text-gray-600 dark:text-gray-400">
-                                            <div class="font-medium">Oleh: {{ $activeBorrowing->peminjam_nama }}</div>
-                                            <div>Kelas: {{ $activeBorrowing->peminjam_kelas }}</div>
-                                            <div class="truncate max-w-xs" title="{{ $activeBorrowing->keperluan }}">
-                                                Keperluan: {{ Str::limit($activeBorrowing->keperluan, 30) }}
-                                            </div>
+                        <tbody class="divide-y divide-slate-50">
+                            @foreach($inventories as $inventory)
+                            <tr class="hover:bg-slate-50/50 transition-colors group">
+                                <td class="px-8 py-6">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center text-primary-600 shadow-inner group-hover:scale-110 transition-transform duration-500">
+                                            <i class="fas fa-cube text-xl opacity-40"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-slate-900 group-hover:text-primary-600 transition-colors tracking-tight">{{ $inventory->nama_barang }}</h4>
+                                            <p class="text-[10px] text-slate-400 font-black font-mono uppercase tracking-tighter">{{ $inventory->kode_barang }}</p>
                                         </div>
                                     </div>
-                                    @else
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-                                        <i class="fas fa-check-circle mr-1"></i>
-                                        Tersedia
-                                    </span>
-                                    @endif
                                 </td>
-
-                                <!-- Lokasi -->
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-800 dark:text-white">{{ $inventory->lokasi_barang }}
+                                <td class="px-8 py-6">
+                                    <div class="flex flex-col gap-2 max-w-[120px]">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Status</span>
+                                            <span class="text-[10px] font-black text-primary-600 uppercase">{{ $inventory->kondisi ?? 'Sangat Baik' }}</span>
+                                        </div>
+                                        <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden shadow-inner">
+                                            <div class="bg-primary-500 h-full rounded-full transition-all duration-1000 shadow-sm" style="width: 85%"></div>
+                                        </div>
                                     </div>
                                 </td>
-
-                                <!-- Aktif -->
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium {{ $inventory->is_active ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' }}">
-                                        <i class="fas {{ $inventory->is_active ? 'fa-check' : 'fa-times' }} mr-1"></i>
-                                        {{ $inventory->is_active ? 'Aktif' : 'Non-Aktif' }}
-                                    </span>
+                                <td class="px-8 py-6">
+                                    <div class="flex flex-col">
+                                        <span class="text-xl font-black text-slate-900 tracking-tighter">{{ $inventory->jumlah }}</span>
+                                        <span class="text-[10px] font-black uppercase tracking-widest text-slate-300">Unit Tersedia</span>
+                                    </div>
                                 </td>
-
-                                <!-- Aksi -->
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <div class="flex items-center space-x-2">
-                                        <a href="{{ route('inventories.show', $inventory) }}"
-                                            class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
-                                            title="Lihat Detail">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                        <a href="{{ route('inventories.edit', $inventory) }}"
-                                            class="text-yellow-600 hover:text-yellow-900 dark:text-yellow-400 dark:hover:text-yellow-300 transition-colors"
-                                            title="Edit">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <form action="{{ route('inventories.destroy', $inventory) }}" method="POST"
-                                            class="inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 transition-colors"
-                                                title="Hapus"
-                                                onclick="return confirm('Apakah Anda yakin ingin menghapus {{ $inventory->nama_barang }}?')">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
+                                <td class="px-8 py-6 text-right">
+                                    <div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+                                        <a href="{{ route('inventories.show', $inventory) }}" class="w-10 h-10 rounded-xl bg-slate-50 text-slate-400 flex items-center justify-center hover:bg-primary-50 hover:text-primary-600 hover:scale-110 transition-all shadow-sm"><i class="fas fa-eye text-sm"></i></a>
+                                        <a href="{{ route('inventories.edit', $inventory) }}" class="w-10 h-10 rounded-xl bg-slate-50 text-slate-400 flex items-center justify-center hover:bg-amber-50 hover:text-amber-600 hover:scale-110 transition-all shadow-sm"><i class="fas fa-edit text-sm"></i></a>
+                                        <form action="{{ route('inventories.destroy', $inventory) }}" method="POST" class="inline">
+                                            @csrf @method('DELETE')
+                                            <button type="submit" class="w-10 h-10 rounded-xl bg-slate-50 text-slate-400 flex items-center justify-center hover:bg-red-50 hover:text-red-600 hover:scale-110 transition-all shadow-sm" onclick="return confirm('Hapus aset ini?')"><i class="fas fa-trash text-sm"></i></button>
                                         </form>
                                     </div>
                                 </td>
                             </tr>
-                            @empty
-                            <tr>
-                                <td colspan="8" class="px-6 py-8 text-center">
-                                    <!-- Update colspan dari 7 menjadi 8 -->
-                                    <div
-                                        class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400">
-                                        <i class="fas fa-boxes text-4xl mb-3"></i>
-                                        <p class="text-lg font-semibold">Tidak ada data fasilitas</p>
-                                        <p class="text-sm">Mulai dengan menambahkan fasilitas baru</p>
-                                        <a href="{{ route('inventories.create') }}" class="mt-4 btn-primary">
-                                            <i class="fas fa-plus mr-2"></i>
-                                            Tambah Fasilitas Pertama
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            @endforelse
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
 
-                <!-- Pagination & Info -->
-                @if($inventories->hasPages() || $inventories->total() > 0)
-                <div class="bg-gray-50 dark:bg-gray-700 px-6 py-4 border-t border-gray-200 dark:border-gray-600">
-                    <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-                        <div class="text-sm text-gray-600 dark:text-gray-400">
-                            Menampilkan
-                            <span class="font-semibold">{{ $inventories->firstItem() ?? 0 }}</span>
-                            sampai
-                            <span class="font-semibold">{{ $inventories->lastItem() ?? 0 }}</span>
-                            dari
-                            <span class="font-semibold">{{ $inventories->total() }}</span>
-                            entri
-                            @if(request('kategori') || request('status'))
-                            (Filter:
-                            @if(request('kategori'))
-                            Kategori: {{ request('kategori') }}
-                            @endif
-                            @if(request('kategori') && request('status'))
-                            ,
-                            @endif
-                            @if(request('status'))
-                            Status: {{ request('status') }}
-                            @endif
-                            )
-                            @endif
-                        </div>
-
-                        @if($inventories->hasPages())
-                        {{ $inventories->appends(request()->query())->links() }}
-                        @endif
-                    </div>
+                <!-- Pagination -->
+                <div class="p-8 bg-slate-50/30 border-t border-slate-50">
+                    {{ $inventories->links() }}
                 </div>
-                @endif
             </div>
         </div>
     </div>
 </div>
-<script>
-function updateUrlParameter(key, value) {
-    const url = new URL(window.location.href);
-
-    if (value) {
-        url.searchParams.set(key, value);
-    } else {
-        url.searchParams.delete(key);
-    }
-
-    if (key === 'kategori' || key === 'status' || key === 'per_page' || key === 'search') {
-        url.searchParams.set('page', '1');
-    }
-
-    return url.toString();
-}
-
-function updateFilter(key, value) {
-    window.location.href = updateUrlParameter(key, value);
-}
-
-function updatePerPage(value) {
-    window.location.href = updateUrlParameter('per_page', value);
-}
-
-function clearFilters() {
-    const url = new URL(window.location.href);
-    url.searchParams.delete('kategori');
-    url.searchParams.delete('status');
-    url.searchParams.delete('search');
-    url.searchParams.set('page', '1');
-    window.location.href = url.toString();
-}
-</script>
 @endsection
