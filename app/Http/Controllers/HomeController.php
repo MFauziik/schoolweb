@@ -7,6 +7,10 @@ use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Inventory;
 
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+
 class HomeController extends Controller
 {
     public function index()
@@ -20,6 +24,12 @@ class HomeController extends Controller
             'activeInventories' => Inventory::where('is_active', true)->count(),
         ];
 
-        return view('home', $stats);
+        return Inertia::render('Home', [
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            'laravelVersion' => Application::VERSION,
+            'phpVersion' => PHP_VERSION,
+            'stats' => $stats,
+        ]);
     }
 }

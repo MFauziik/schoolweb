@@ -10,6 +10,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
+use Inertia\Inertia;
+
 class DashboardController extends Controller
 {
     public function index()
@@ -26,10 +28,12 @@ class DashboardController extends Controller
         // Recent Activities Data
         $recentActivities = $this->getRecentActivities();
 
-        return view('dashboard', array_merge($stats, [
+        return Inertia::render('Dashboard', [
+            'stats' => $stats,
             'recentActivities' => $recentActivities
-        ]));
+        ]);
     }
+
 
 
     public function getRecentActivities()

@@ -5,23 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 
+use Inertia\Inertia;
+
 class TeacherController extends Controller
 {
     public function index(Request $request)
     {
         $query = Teacher::query();
 
-        // Filter jabatan
         if ($request->filled('jabatan')) {
             $query->where('jabatan', $request->jabatan);
         }
 
-        // Filter status (optional)
         if ($request->has('status') && $request->status !== '') {
             $query->where('is_active', $request->status);
         }
 
-        // Search by nama, nip, jabatan, email, no_hp
         if ($request->filled('search')) {
             $s = $request->search;
             $query->where(function ($q) use ($s) {
@@ -33,23 +32,18 @@ class TeacherController extends Controller
             });
         }
 
-        // Per page with whitelist
         $perPage = (int) $request->get('per_page', 10);
-        $allowed = [10,25,50,100];
-        if (!in_array($perPage, $allowed)) { $perPage = 10; }
-
-        $teachers = $query->paginate($perPage);
-        $teachers->appends($request->except('page'));
-
-        // unique jabatan list for filter (from DB)
-        $jabatans = Teacher::select('jabatan')->distinct()->orderBy('jabatan')->pluck('jabatan');
-
-        return view('teachers.index', compact('teachers', 'jabatans'));
+        
+        return Inertia::render('Teachers/Index', [
+            'teachers' => $query->paginate($perPage)->withQueryString(),
+            'jabatans' => Teacher::select('jabatan')->distinct()->orderBy('jabatan')->pluck('jabatan'),
+            'filters' => $request->only(['search', 'jabatan', 'status']),
+        ]);
     }
 
     public function create()
     {
-        return view('teachers.create');
+        return Inertia::render('Teachers/Create');
     }
 
     public function store(Request $request)
@@ -70,18 +64,22 @@ class TeacherController extends Controller
 
     public function show(Teacher $teacher)
     {
-        return view('teachers.show', compact('teacher'));
+        return Inertia::render('Teachers/Show', [
+            'teacher' => $teacher
+        ]);
     }
 
     public function edit(Teacher $teacher)
     {
-        return view('teachers.edit', compact('teacher'));
+        return Inertia::render('Teachers/Edit', [
+            'teacher' => $teacher
+        ]);
     }
 
     public function update(Request $request, Teacher $teacher)
     {
         $validated = $request->validate([
-            'nip' => 'required|unique:teachers,nip,' . $teacher->id . '',
+            'nip' => 'required|unique:teachers,nip,' . $teacher->id,
             'nama' => 'required|string|max:255',
             'jabatan' => 'required|string|max:255',
             'no_hp' => 'required|string',
