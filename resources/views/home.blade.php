@@ -115,7 +115,7 @@
                 <h2 class="text-[10px] font-black uppercase tracking-[0.5em] text-primary-600 mb-8">Modul Terintegrasi</h2>
                 <h3 class="text-6xl md:text-8xl font-black tracking-tighter mb-10 leading-none">Solusi Cerdas untuk <br class="hidden md:block"/> Pendidikan.</h3>
                 <p class="text-2xl text-slate-500 max-w-4xl mx-auto leading-relaxed font-medium tracking-tight">
-                    SmartSchool menyediakan alat bantu yang dirancang khusus untuk meningkatkan produktivitas operasional sekolah Anda.
+                    EduManage menyediakan alat bantu yang dirancang khusus untuk meningkatkan produktivitas operasional sekolah Anda.
                 </p>
             </div>
 
@@ -165,7 +165,7 @@
                     <div>
                         <h3 class="text-6xl md:text-8xl font-black tracking-tighter mb-12 leading-[0.95]">Tingkatkan Kualitas <br/> Sekolah Anda.</h3>
                         <p class="text-2xl text-slate-400 font-medium leading-relaxed mb-16 tracking-tight">
-                            Bergabunglah dengan lebih dari 2.500 institusi pendidikan yang telah menggunakan sistem SmartSchool untuk memajukan pendidikan.
+                            Bergabunglah dengan lebih dari 2.500 institusi pendidikan yang telah menggunakan sistem EduManage untuk memajukan pendidikan.
                         </p>
                         <div class="flex flex-col sm:flex-row gap-10">
                             @auth

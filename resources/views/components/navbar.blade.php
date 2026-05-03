@@ -5,7 +5,7 @@
             <div class="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-gradient-to-br from-primary-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-primary-500/30 group-hover:rotate-12 transition-transform duration-500">
                 <i class="fas fa-graduation-cap text-white text-xl md:text-2xl"></i>
             </div>
-            <span class="text-xl md:text-2xl font-black tracking-tighter bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent italic uppercase">SmartSchool</span>
+            <span class="text-xl md:text-2xl font-black tracking-tighter bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent italic uppercase">EduManage</span>
         </div>
 
         <div class="hidden lg:flex items-center gap-10 font-bold text-sm uppercase tracking-widest text-slate-500">

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>SmartSchool | Next-Gen Education Management</title>
+        <title>EduManage | Next-Gen Education Management</title>
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -128,7 +128,7 @@
                     </h1>
                     
                     <p class="text-xl md:text-3xl text-slate-400 leading-relaxed mb-20 max-w-4xl mx-auto font-medium tracking-tight">
-                        SmartSchool is the high-performance core for modern learning environments. Centralize telemetry, automate administration, and amplify pedagogical output.
+                        EduManage is the high-performance core for modern learning environments. Centralize telemetry, automate administration, and amplify pedagogical output.
                     </p>
                     
                     <div class="flex flex-col sm:flex-row items-center justify-center gap-8">
@@ -197,7 +197,7 @@
                     <h2 class="text-[10px] font-black uppercase tracking-[0.5em] text-primary-600 mb-8">Architectural Modules</h2>
                     <h3 class="text-6xl md:text-8xl font-black tracking-tighter mb-10 leading-[0.9] text-slate-900">Precision Engineered <br/> Ecosystem.</h3>
                     <p class="text-2xl text-slate-400 max-w-4xl mx-auto leading-relaxed font-medium tracking-tight">
-                        SmartSchool deploys a constellation of intelligent sub-systems designed to unify every vector of school management.
+                        EduManage deploys a constellation of intelligent sub-systems designed to unify every vector of school management.
                     </p>
                 </div>
 
@@ -256,7 +256,7 @@
                         <div>
                             <h3 class="text-6xl md:text-8xl font-black tracking-tighter mb-12 leading-[0.95]">Deploy Excellence. <br/> At Scale.</h3>
                             <p class="text-2xl text-slate-400 font-medium leading-relaxed mb-16 tracking-tight">
-                                Join over 2,500 global institutions already operating on the SmartSchool architecture.
+                                Join over 2,500 global institutions already operating on the EduManage architecture.
                             </p>
                             <div class="flex flex-col sm:flex-row gap-10">
                                 <a href="{{ route('register') }}" class="bg-white text-slate-950 !rounded-2xl py-6 px-16 text-xl font-black uppercase tracking-[0.2em] hover:scale-105 active:scale-95 transition-all text-center">Initialize Now</a>
@@ -295,7 +295,7 @@
                             <div class="w-16 h-16 rounded-[1.5rem] bg-gradient-to-br from-primary-600 to-indigo-600 flex items-center justify-center shadow-2xl shadow-primary-500/30">
                                 <i class="fas fa-graduation-cap text-white text-3xl"></i>
                             </div>
-                            <span class="text-4xl font-black tracking-tighter italic text-slate-900 uppercase">SmartSchool</span>
+                            <span class="text-4xl font-black tracking-tighter italic text-slate-900 uppercase">EduManage</span>
                         </div>
                         <p class="text-2xl text-slate-400 max-w-md mb-16 leading-relaxed font-medium tracking-tight">
                             The definitive architectural backbone for digital-first education sectors.
@@ -326,7 +326,7 @@
                     </div>
                 </div>
                 <div class="flex flex-col md:flex-row items-center justify-between pt-20 border-t border-slate-100 text-[10px] font-black tracking-[0.4em] uppercase text-slate-400">
-                    <p>&copy; 2024 SmartSchool System. Operational Excellence.</p>
+                    <p>&copy; 2026 EduManage System. Operational Excellence.</p>
                     <div class="flex items-center gap-14 mt-12 md:mt-0">
                         <a href="#" class="hover:text-primary-600 transition-all">Privacy Protocol</a>
                         <a href="#" class="hover:text-primary-600 transition-all">Terms of Ops</a>

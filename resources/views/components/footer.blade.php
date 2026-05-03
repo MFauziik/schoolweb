@@ -6,7 +6,7 @@
                     <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-primary-500/20">
                         <i class="fas fa-graduation-cap text-white text-2xl"></i>
                     </div>
-                    <span class="text-3xl font-black tracking-tighter italic text-slate-900 uppercase">SmartSchool</span>
+                    <span class="text-3xl font-black tracking-tighter italic text-slate-900 uppercase">EduManage</span>
                 </div>
                 <p class="text-xl text-slate-500 max-w-sm mb-12 leading-relaxed font-bold tracking-tight">
                     Membangun tulang punggung digital untuk masa depan pendidikan yang lebih baik.
@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="flex flex-col md:flex-row items-center justify-between pt-16 border-t border-slate-100 text-sm font-bold tracking-widest uppercase text-slate-400">
-            <p>&copy; 2024 SmartSchool. Keunggulan Digital.</p>
+            <p>&copy; 2024 EduManage. Keunggulan Digital.</p>
             <div class="flex items-center gap-10 mt-8 md:mt-0">
                 <a href="#" class="hover:text-primary-600 transition-colors">Privasi</a>
                 <a href="#" class="hover:text-primary-600 transition-colors">Syarat</a>

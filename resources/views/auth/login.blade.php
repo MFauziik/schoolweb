@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Masuk | SmartSchool</title>
+    <title>Masuk | EduManage</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +25,7 @@
             <div class="w-16 h-16 bg-primary-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl shadow-primary-500/20">
                 <i class="fas fa-graduation-cap text-white text-2xl"></i>
             </div>
-            <h1 class="text-3xl font-black tracking-tight text-slate-900 uppercase">SmartSchool</h1>
+            <h1 class="text-3xl font-black tracking-tight text-slate-900 uppercase">EduManage</h1>
             <p class="text-slate-500 font-medium">Selamat datang kembali, silakan masuk.</p>
         </div>
 
@@ -93,7 +93,7 @@
         </div>
 
         <p class="text-center mt-8 text-[10px] font-bold uppercase tracking-widest text-slate-400">
-            &copy; 2024 SmartSchool System
+            &copy; 2024 EduManage System
         </p>
     </div>
 </body>

@@ -5,7 +5,7 @@
             <i class="fas fa-graduation-cap text-white text-xl"></i>
         </div>
         <div>
-            <h2 class="text-xl font-black tracking-tighter text-slate-900 leading-none">SmartSchool</h2>
+            <h2 class="text-xl font-black tracking-tighter text-slate-900 leading-none">EduManage</h2>
             <p class="text-[10px] uppercase tracking-[0.3em] font-black text-slate-400 mt-1">Sistem Sekolah</p>
         </div>
     </div>

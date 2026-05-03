@@ -208,8 +208,11 @@
             </div>
         </div>
     </div>
-    @push('scripts')
-    <script>
+</div>
+@endsection
+
+@push('scripts')
+<script>
     // Implementasi REAL untuk update Activities
     function updateActivities(data) {
         const container = document.getElementById('recentActivitiesContainer');
@@ -292,22 +295,9 @@
         }, 3000);
     }
 
-    // Initialize real-time updates when page loads
+    // Initialize when page loads
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('Dashboard real-time features initialized');
-        startAutoRefresh();
-
-        // Add data attributes for easier DOM selection
-        document.querySelectorAll('[data-status]').forEach(element => {
-            element.setAttribute('data-status', element.getAttribute('data-status'));
-        });
+        console.log('Dashboard initialized');
     });
-
-    // Export functions for global access (optional)
-    window.refreshSystemStatus = refreshSystemStatus;
-    window.refreshActivities = refreshActivities;
-    window.startAutoRefresh = startAutoRefresh;
-    window.stopAutoRefresh = stopAutoRefresh;
-    </script>
-    @endpush
-    @endsection
+</script>
+@endpush
